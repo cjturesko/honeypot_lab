@@ -15,7 +15,6 @@ This project was built as a hands-on learning experience to explore honeypot dep
 - Session durations
 - IP geolocation and reputation
 - Command usage
-- Country heatmaps
 - Error statistics
 
 Data is extracted from Cowrie logs and presented using Bootstrap and custom styling in a dark-themed interface.
@@ -24,7 +23,7 @@ Data is extracted from Cowrie logs and presented using Bootstrap and custom styl
 
 ## 🖼️ Dashboard Preview
 
-> You can click the live link above to see the full dashboard.  
+You can click the live link above to see the full dashboard.  
 
 ---
 
@@ -38,6 +37,3 @@ Data is extracted from Cowrie logs and presented using Bootstrap and custom styl
 - ⚠️ **Traceback/error session detection**
 
 ---
-
-## 📁 File Structure
-
