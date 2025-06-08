@@ -245,10 +245,6 @@
             font-size: 0.85rem;
             color: #aaaaaa;
         }
-        /* DEBUG: Add red border to debug section */
-        .debug-section {
-            border: 2px solid red !important;
-        }
     </style>
 </head>
 <body>
@@ -259,7 +255,7 @@
                     <div class="card-body">
                         <h1 class="text-center"><i class="bi bi-shield-lock"></i> Cowrie Honeypot Analysis</h1>
                         <p class="text-center">
-                            Data collected from a Cowrie SSH/Telnet honeypot. Last updated: 2025-06-08 03:16:01
+                            Data collected from a Cowrie SSH/Telnet honeypot. Last updated: 2025-06-08 03:26:28
                         </p>
                         <div class="menu-links">
                             <a href="#stats"><i class="bi bi-bar-chart-fill"></i> Statistics</a>
@@ -271,25 +267,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- DEBUG: Check if this section appears -->
-        <div class="row mt-4">
-            <div class="col-12">
-                <div class="card debug-section" style="background-color: #2d1b1b; border: 2px solid #ff0000;">
-                    <div class="card-header" style="background-color: #5d2d2d;">
-                        <i class="bi bi-bug"></i> DEBUG INFO - Remove this section when fixed
-                    </div>
-                    <div class="card-body">
-                        <p>File hashes found: 9</p>
-                        <p>Recent hashes processed: 5</p>
-                        <p>Unknown samples: 0</p>
-                        <p>Hash timestamps: 9</p>
-                        <p>VT results: 9</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="row mt-4">
             <div class="col-12">
                 <div class="card">
@@ -309,7 +286,7 @@
             <div class="col-md-3">
                 <div class="card stats-card">
                     <i class="bi bi-person-lock"></i>
-                    <div class="number">270288</div>
+                    <div class="number">270320</div>
                     <div class="label">Total Sessions</div>
                 </div>
             </div>
@@ -323,7 +300,7 @@
             <div class="col-md-3">
                 <div class="card stats-card">
                     <i class="bi bi-terminal"></i>
-                    <div class="number">134458</div>
+                    <div class="number">134464</div>
                     <div class="label">Commands Executed</div>
                 </div>
             </div>
@@ -366,6 +343,20 @@
                     </tr>
                     
                     <tr>
+                        <td><a href="https://www.virustotal.com/gui/file/4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865" target="_blank" rel="noopener noreferrer" class="hash-link"><code>4355a46b19d348dc...</code></a></td>
+                        <td>2025-06-05 02:49:01</td>
+                        <td>0/76</td>
+                        <td><span class="hash-status-clean">Clean</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><a href="https://www.virustotal.com/gui/file/a8460f446be540410004b1a8db4083773fa46f7fe76fa84219c93daa1669f8f2" target="_blank" rel="noopener noreferrer" class="hash-link"><code>a8460f446be54041...</code></a></td>
+                        <td>2025-06-04 00:00:34</td>
+                        <td>29/76</td>
+                        <td><span class="hash-status-detected">Detected</span></td>
+                    </tr>
+                    
+                    <tr>
                         <td><a href="https://www.virustotal.com/gui/file/ac017ec31921e5ce9118aac5b71d61d02a67378f6786000baec0c2caadc4a3a3" target="_blank" rel="noopener noreferrer" class="hash-link"><code>ac017ec31921e5ce...</code></a></td>
                         <td>2025-06-02 00:24:33</td>
                         <td>31/76</td>
@@ -377,20 +368,6 @@
                         <td>2025-05-31 23:01:34</td>
                         <td>37/76</td>
                         <td><span class="hash-status-detected">Detected</span></td>
-                    </tr>
-                    
-                    <tr>
-                        <td><a href="https://www.virustotal.com/gui/file/199d11d0fd7043fe9206954ed8bc7b54d1912013a2a71bdf8bb007b71bb490c8" target="_blank" rel="noopener noreferrer" class="hash-link"><code>199d11d0fd7043fe...</code></a></td>
-                        <td>2025-05-31 07:36:11</td>
-                        <td>0/76</td>
-                        <td><span class="hash-status-clean">Clean</span></td>
-                    </tr>
-                    
-                    <tr>
-                        <td><a href="https://www.virustotal.com/gui/file/01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b" target="_blank" rel="noopener noreferrer" class="hash-link"><code>01ba4719c80b6fe9...</code></a></td>
-                        <td>2025-05-31 07:21:48</td>
-                        <td>0/76</td>
-                        <td><span class="hash-status-clean">Clean</span></td>
                     </tr>
                     
                 </tbody>
@@ -478,102 +455,102 @@
                                 <tbody>
                                     
                                     <tr>
-                                        <td>998ff8ce3f28</td>
-                                        <td>103.31.38.209</td>
-                                        <td>Indonesia</td>
+                                        <td>78bdcbcbaa84</td>
+                                        <td>68.183.98.244</td>
+                                        <td>United States</td>
                                         <td>Unknown</td>
-                                        <td>2025-06-08 03:15:58</td>
-                                        <td>2.59s</td>
+                                        <td>2025-06-08 03:26:28</td>
+                                        <td>0.02s</td>
                                         <td>0</td>
                                     </tr>
                                     
                                     <tr>
-                                        <td>18f5a4e5c806</td>
-                                        <td>185.216.132.243</td>
-                                        <td>Syria</td>
+                                        <td>a40bf2f65e83</td>
+                                        <td>167.71.15.102</td>
+                                        <td>The Netherlands</td>
                                         <td>Unknown</td>
-                                        <td>2025-06-08 03:15:45</td>
-                                        <td>1.86s</td>
+                                        <td>2025-06-08 03:25:19</td>
+                                        <td>1.52s</td>
                                         <td>0</td>
                                     </tr>
                                     
                                     <tr>
-                                        <td>6b01456f3a1b</td>
-                                        <td>220.78.169.133</td>
-                                        <td>South Korea</td>
-                                        <td>Unknown</td>
-                                        <td>2025-06-08 03:15:23</td>
-                                        <td>2.24s</td>
-                                        <td>0</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td>18c04a7d805d</td>
-                                        <td>47.236.7.212</td>
-                                        <td>Singapore</td>
-                                        <td>Unknown</td>
-                                        <td>2025-06-08 03:15:15</td>
-                                        <td>2.53s</td>
-                                        <td>0</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td>aa47a724ad77</td>
+                                        <td>869bfab778d1</td>
                                         <td>189.7.17.61</td>
                                         <td>Brazil</td>
                                         <td>Unknown</td>
-                                        <td>2025-06-08 03:14:59</td>
-                                        <td>6.41s</td>
+                                        <td>2025-06-08 03:25:19</td>
+                                        <td>4.65s</td>
                                         <td>0</td>
                                     </tr>
                                     
                                     <tr>
-                                        <td>b25298c81c4c</td>
+                                        <td>55558ca42343</td>
                                         <td>189.7.17.61</td>
                                         <td>Brazil</td>
                                         <td>Unknown</td>
-                                        <td>2025-06-08 03:14:53</td>
-                                        <td>21.64s</td>
+                                        <td>2025-06-08 03:25:17</td>
+                                        <td>2.75s</td>
                                         <td>0</td>
                                     </tr>
                                     
                                     <tr>
-                                        <td>3ff6e50e54a6</td>
-                                        <td>147.50.103.212</td>
-                                        <td>Thailand</td>
+                                        <td>51aa2e09e211</td>
+                                        <td>189.7.17.61</td>
+                                        <td>Brazil</td>
                                         <td>Unknown</td>
-                                        <td>2025-06-08 03:14:24</td>
-                                        <td>2.73s</td>
-                                        <td>0</td>
+                                        <td>2025-06-08 03:25:02</td>
+                                        <td>21.40s</td>
+                                        <td>2</td>
                                     </tr>
                                     
                                     <tr>
-                                        <td>5e1ac405504a</td>
+                                        <td>afd19d891955</td>
                                         <td>47.236.7.212</td>
                                         <td>Singapore</td>
                                         <td>Unknown</td>
-                                        <td>2025-06-08 03:14:18</td>
-                                        <td>1.55s</td>
-                                        <td>0</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td>78b3c2ab892d</td>
-                                        <td>47.236.7.212</td>
-                                        <td>Singapore</td>
-                                        <td>Unknown</td>
-                                        <td>2025-06-08 03:14:16</td>
+                                        <td>2025-06-08 03:24:59</td>
                                         <td>2.54s</td>
                                         <td>0</td>
                                     </tr>
                                     
                                     <tr>
-                                        <td>cd1b841b730f</td>
-                                        <td>47.236.7.212</td>
-                                        <td>Singapore</td>
+                                        <td>d2a3c1269b82</td>
+                                        <td>102.210.80.6</td>
+                                        <td>Ivory Coast</td>
                                         <td>Unknown</td>
-                                        <td>2025-06-08 03:14:13</td>
-                                        <td>7.44s</td>
+                                        <td>2025-06-08 03:24:45</td>
+                                        <td>2.51s</td>
+                                        <td>0</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>053251bab5e8</td>
+                                        <td>185.216.132.243</td>
+                                        <td>Syria</td>
+                                        <td>Unknown</td>
+                                        <td>2025-06-08 03:24:10</td>
+                                        <td>0.91s</td>
+                                        <td>0</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>cc23116b271d</td>
+                                        <td>185.216.132.243</td>
+                                        <td>Syria</td>
+                                        <td>Unknown</td>
+                                        <td>2025-06-08 03:24:08</td>
+                                        <td>1.86s</td>
+                                        <td>0</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>f0bf4c23854a</td>
+                                        <td>185.216.132.243</td>
+                                        <td>Syria</td>
+                                        <td>Unknown</td>
+                                        <td>2025-06-08 03:24:06</td>
+                                        <td>4.71s</td>
                                         <td>2</td>
                                     </tr>
                                     
