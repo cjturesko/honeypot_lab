@@ -1,801 +1,596 @@
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cowrie Honeypot Dashboard</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-        <style>
-            body {
-                background-color: #121212;
-                color: #e0e0e0;
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            }
-            .card {
-                background-color: #1e1e1e;
-                border: 1px solid #333;
-                margin-bottom: 20px;
-                border-radius: 10px;
-                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-            }
-            .card-header {
-                background-color: #252525;
-                border-bottom: 1px solid #333;
-                font-weight: bold;
-                color: #00bc8c;
-            }
-            .table {
-                color: #e0e0e0;
-            }
-            .table-dark {
-                background-color: #252525;
-                color: #e0e0e0;
-            }
-            .table-dark td, .table-dark th {
-                color: #e0e0e0;
-                border-color: #333;
-            }
-            .highlight {
-                color: #00bc8c;
-                font-weight: bold;
-            }
-            .stats-card {
-                text-align: center;
-                padding: 20px 10px;
-            }
-            .stats-card i {
-                font-size: 2.5rem;
-                margin-bottom: 10px;
-                color: #00bc8c;
-            }
-            .stats-card .number {
-                font-size: 1.8rem;
-                font-weight: bold;
-                color: #ffffff;
-            }
-            .stats-card .label {
-                font-size: 0.9rem;
-                color: #aaaaaa;
-            }
-            .chart-container {
-                margin-bottom: 20px;
-                position: relative;
-            }
-            .chart-container img {
-                width: 100%;
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                cursor: pointer;
-                transition: transform 0.2s;
-            }
-            .chart-container img:hover {
-                transform: scale(1.02);
-            }
-            .clickable-chart::after {
-                content: "🔍 Click to enlarge";
-                position: absolute;
-                bottom: 15px;
-                right: 15px;
-                background: rgba(0, 0, 0, 0.8);
-                color: white;
-                padding: 5px 10px;
-                border-radius: 5px;
-                font-size: 12px;
-                opacity: 0;
-                transition: opacity 0.3s;
-                pointer-events: none;
-            }
-            .clickable-chart:hover::after {
-                opacity: 1;
-            }
-            .nav-tabs {
-                border-bottom: 1px solid #333;
-            }
-            .nav-tabs .nav-link {
-                color: #aaaaaa;
-            }
-            .nav-tabs .nav-link:hover {
-                border-color: #333 #333 #333;
-                color: #00bc8c;
-            }
-            .nav-tabs .nav-link.active {
-                background-color: #1e1e1e;
-                border-color: #333 #333 transparent;
-                color: #00bc8c;
-            }
-            .tab-content {
-                padding: 15px;
-                background-color: #1e1e1e;
-                border: 1px solid #333;
-                border-top: none;
-            }
-            .menu-links {
-                text-align: center;
-                margin: 20px 0;
-            }
-            .menu-links a {
-                color: #e0e0e0;
-                text-decoration: none;
-                margin: 0 15px;
-                padding: 5px 10px;
-                border-radius: 5px;
-                transition: background-color 0.3s;
-            }
-            .menu-links a:hover {
-                background-color: #333;
-                color: #00bc8c;
-            }
-            .menu-links i {
-                margin-right: 5px;
-            }
-            .btn-outline-info {
-                color: #5bc0de;
-                border-color: #5bc0de;
-            }
-            .btn-outline-info:hover {
-                background-color: #5bc0de;
-                color: #121212;
-            }
-            .modal-content {
-                background-color: #1e1e1e;
-                color: #e0e0e0;
-                border: 1px solid #333;
-            }
-            .modal-header {
-                border-bottom: 1px solid #333;
-            }
-            .modal-footer {
-                border-top: 1px solid #333;
-            }
-            .btn-close {
-                filter: invert(1);
-            }
-            .stats-metric {
-                text-align: center;
-                padding: 10px;
-                border-radius: 5px;
-                background-color: #252525;
-            }
-            .stats-metric .value {
-                display: block;
-                font-size: 1.8rem;
-                font-weight: bold;
-                margin-bottom: 5px;
-            }
-            .stats-metric .label {
-                display: block;
-                font-size: 0.9rem;
-                color: #aaaaaa;
-            }
-            #imageModal .modal-dialog {
-                max-width: 95vw;
-            }
-            #imageModal .modal-body {
-                padding: 20px;
-            }
-            #imageModal img {
-                max-width: 100%;
-                height: auto;
-                border-radius: 10px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container mt-4">
-            <div class="row mb-4">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h1 class="text-center"><i class="bi bi-shield-lock"></i> Cowrie Honeypot Analysis</h1>
-                            <p class="text-center">
-                                Data collected from a Cowrie SSH/Telnet honeypot. Last updated: 2025-06-08 02:53:54
-                            </p>
-                            <div class="menu-links">
-                                <a href="#stats"><i class="bi bi-bar-chart-fill"></i> Statistics</a>
-                                <a href="#attacks"><i class="bi bi-exclamation-triangle"></i> Recent Attacks</a>
-                                <a href="#visualizations"><i class="bi bi-graph-up"></i> Visualizations</a>
-                            </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cowrie Honeypot Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .card {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        .card-header {
+            background-color: #252525;
+            border-bottom: 1px solid #333;
+            font-weight: bold;
+            color: #00bc8c;
+        }
+        .table {
+            color: #e0e0e0;
+        }
+        .table-dark {
+            background-color: #252525;
+            color: #e0e0e0;
+        }
+        .table-dark td, .table-dark th {
+            color: #e0e0e0;
+            border-color: #333;
+        }
+        .highlight {
+            color: #00bc8c;
+            font-weight: bold;
+        }
+        .stats-card {
+            text-align: center;
+            padding: 20px 10px;
+        }
+        .stats-card i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #00bc8c;
+        }
+        .stats-card .number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .stats-card .label {
+            font-size: 0.9rem;
+            color: #aaaaaa;
+        }
+        .chart-container {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .chart-container img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .chart-container img:hover {
+            transform: scale(1.02);
+        }
+        .clickable-chart::after {
+            content: "🔍 Click to enlarge";
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .clickable-chart:hover::after {
+            opacity: 1;
+        }
+        .nav-tabs {
+            border-bottom: 1px solid #333;
+        }
+        .nav-tabs .nav-link {
+            color: #aaaaaa;
+        }
+        .nav-tabs .nav-link:hover {
+            border-color: #333 #333 #333;
+            color: #00bc8c;
+        }
+        .nav-tabs .nav-link.active {
+            background-color: #1e1e1e;
+            border-color: #333 #333 transparent;
+            color: #00bc8c;
+        }
+        .tab-content {
+            padding: 15px;
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-top: none;
+        }
+        .menu-links {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .menu-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .menu-links a:hover {
+            background-color: #333;
+            color: #00bc8c;
+        }
+        .menu-links i {
+            margin-right: 5px;
+        }
+        .btn-outline-info {
+            color: #5bc0de;
+            border-color: #5bc0de;
+        }
+        .btn-outline-info:hover {
+            background-color: #5bc0de;
+            color: #121212;
+        }
+        .modal-content {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            border: 1px solid #333;
+        }
+        .modal-header {
+            border-bottom: 1px solid #333;
+        }
+        .modal-footer {
+            border-top: 1px solid #333;
+        }
+        .btn-close {
+            filter: invert(1);
+        }
+        .stats-metric {
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #252525;
+        }
+        .stats-metric .value {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .stats-metric .label {
+            display: block;
+            font-size: 0.9rem;
+            color: #aaaaaa;
+        }
+        .hash-status-detected {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .hash-status-clean {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .hash-status-unknown {
+            color: #ffc107;
+            font-weight: bold;
+        }
+        .unknown-samples-bar {
+            background-color: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .hash-link {
+            color: #00bc8c;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .hash-link:hover {
+            color: #5bc0de;
+            text-decoration: underline;
+        }
+        .hash-link:visited {
+            color: #9b59b6;
+        }
+        #imageModal .modal-dialog {
+            max-width: 95vw;
+        }
+        #imageModal .modal-body {
+            padding: 20px;
+        }
+        #imageModal img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        /* Equal height cards fix */
+        .equal-height-row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .equal-height-row > div {
+            display: flex;
+            flex-direction: column;
+        }
+        .equal-height-row .card {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .equal-height-row .card-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .equal-height-row .chart-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card-footer-note {
+            margin-top: auto;
+            padding-top: 10px;
+            border-top: 1px solid #333;
+            font-size: 0.85rem;
+            color: #aaaaaa;
+        }
+        /* DEBUG: Add red border to debug section */
+        .debug-section {
+            border: 2px solid red !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="text-center"><i class="bi bi-shield-lock"></i> Cowrie Honeypot Analysis</h1>
+                        <p class="text-center">
+                            Data collected from a Cowrie SSH/Telnet honeypot. Last updated: 2025-06-08 03:16:01
+                        </p>
+                        <div class="menu-links">
+                            <a href="#stats"><i class="bi bi-bar-chart-fill"></i> Statistics</a>
+                            <a href="#attacks"><i class="bi bi-exclamation-triangle"></i> Recent Attacks</a>
+                            <a href="#hashes"><i class="bi bi-file-earmark-binary"></i> File Hashes</a>
+                            <a href="#visualizations"><i class="bi bi-graph-up"></i> Visualizations</a>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="row mt-4">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <i class="bi bi-graph-up"></i> Connections Over Time
-                        </div>
-                        <div class="card-body">
-                            <div class="chart-container clickable-chart">
-                                <img src="images/connections_over_time.png" alt="Connections Over Time" class="img-fluid" onclick="showLargeImage('images/connections_over_time.png', 'Connections Over Time')">
-                            </div>
+        <!-- DEBUG: Check if this section appears -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card debug-section" style="background-color: #2d1b1b; border: 2px solid #ff0000;">
+                    <div class="card-header" style="background-color: #5d2d2d;">
+                        <i class="bi bi-bug"></i> DEBUG INFO - Remove this section when fixed
+                    </div>
+                    <div class="card-body">
+                        <p>File hashes found: 9</p>
+                        <p>Recent hashes processed: 5</p>
+                        <p>Unknown samples: 0</p>
+                        <p>Hash timestamps: 9</p>
+                        <p>VT results: 9</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-graph-up"></i> Connections Over Time
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container clickable-chart">
+                            <img src="images/connections_over_time.png" alt="Connections Over Time" class="img-fluid" onclick="showLargeImage('images/connections_over_time.png', 'Connections Over Time')">
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="row" id="stats">
-                <div class="col-md-3">
-                    <div class="card stats-card">
-                        <i class="bi bi-person-lock"></i>
-                        <div class="number">270199</div>
-                        <div class="label">Total Sessions</div>
-                    </div>
+        <div class="row" id="stats">
+            <div class="col-md-3">
+                <div class="card stats-card">
+                    <i class="bi bi-person-lock"></i>
+                    <div class="number">270288</div>
+                    <div class="label">Total Sessions</div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card stats-card">
-                        <i class="bi bi-globe"></i>
-                        <div class="number">7012</div>
-                        <div class="label">Unique IP Addresses</div>
-                    </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stats-card">
+                    <i class="bi bi-globe"></i>
+                    <div class="number">7012</div>
+                    <div class="label">Unique IP Addresses</div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card stats-card">
-                        <i class="bi bi-terminal"></i>
-                        <div class="number">134422</div>
-                        <div class="label">Commands Executed</div>
-                    </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stats-card">
+                    <i class="bi bi-terminal"></i>
+                    <div class="number">134458</div>
+                    <div class="label">Commands Executed</div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card stats-card">
-                        <i class="bi bi-file-earmark-binary"></i>
-                        <div class="number">9</div>
-                        <div class="label">Downloaded Files</div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stats-card">
+                    <i class="bi bi-file-earmark-binary"></i>
+                    <div class="number">9</div>
+                    <div class="label">Downloaded Files</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Latest File Hashes Section -->
+        <div class="row mt-4" id="hashes">
+            <div class="col-12">
+                <div class="card debug-section" style="border: 2px solid #00ff00;">
+                    <div class="card-header">
+                        <i class="bi bi-file-earmark-binary"></i> Latest File Hashes
+                        <small class="text-muted ms-2">VirusTotal Detection Results</small>
+                    </div>
+                    <div class="card-body">
+                        
+        <div class="table-responsive">
+            <table class="table table-dark table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Hash (SHA256)</th>
+                        <th>First Seen</th>
+                        <th>VT Detection</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td><a href="https://www.virustotal.com/gui/file/babc81fc9c998e9dc4ab545f0e112e34d2641e1333bc81aaa131abd061a5b604" target="_blank" rel="noopener noreferrer" class="hash-link"><code>babc81fc9c998e9d...</code></a></td>
+                        <td>2025-06-05 20:34:04</td>
+                        <td>1/76</td>
+                        <td><span class="hash-status-detected">Detected</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><a href="https://www.virustotal.com/gui/file/ac017ec31921e5ce9118aac5b71d61d02a67378f6786000baec0c2caadc4a3a3" target="_blank" rel="noopener noreferrer" class="hash-link"><code>ac017ec31921e5ce...</code></a></td>
+                        <td>2025-06-02 00:24:33</td>
+                        <td>31/76</td>
+                        <td><span class="hash-status-detected">Detected</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><a href="https://www.virustotal.com/gui/file/fbf1c9dc7498a886525223f110c4252c574d0cc3edc3cde7ca58fcebe7240fe4" target="_blank" rel="noopener noreferrer" class="hash-link"><code>fbf1c9dc7498a886...</code></a></td>
+                        <td>2025-05-31 23:01:34</td>
+                        <td>37/76</td>
+                        <td><span class="hash-status-detected">Detected</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><a href="https://www.virustotal.com/gui/file/199d11d0fd7043fe9206954ed8bc7b54d1912013a2a71bdf8bb007b71bb490c8" target="_blank" rel="noopener noreferrer" class="hash-link"><code>199d11d0fd7043fe...</code></a></td>
+                        <td>2025-05-31 07:36:11</td>
+                        <td>0/76</td>
+                        <td><span class="hash-status-clean">Clean</span></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><a href="https://www.virustotal.com/gui/file/01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b" target="_blank" rel="noopener noreferrer" class="hash-link"><code>01ba4719c80b6fe9...</code></a></td>
+                        <td>2025-05-31 07:21:48</td>
+                        <td>0/76</td>
+                        <td><span class="hash-status-clean">Clean</span></td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="text-center mt-3">
+            <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#allHashesModal">
+              <i class="bi bi-three-dots"></i> View All File Hashes
+            </button>
+        </div>
+        
+        
+        
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="row mt-4">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <i class="bi bi-shield-exclamation"></i> Attack Infrastructure
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="stats-metric">
-                                        <span class="value highlight">177</span>
-                                        <span class="label">Data Center</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="stats-metric">
-                                        <span class="value highlight">1</span>
-                                        <span class="label">VPN/Proxy</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="stats-metric">
-                                        <span class="value highlight">8</span>
-                                        <span class="label">Tor Exit Node</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-4">
-                                    <div class="stats-metric">
-                                        <span class="value highlight">6789</span>
-                                        <span class="label">Unknown</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="stats-metric">
-                                        <span class="value highlight">15</span>
-                                        <span class="label">Residential</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="stats-metric">
-                                        <span class="value highlight">20</span>
-                                        <span class="label">Mobile</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-6">
-                                    <div class="stats-metric">
-                                        <span class="value highlight">2</span>
-                                        <span class="label">Education</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="stats-metric">
-                                        <span class="value highlight">0</span>
-                                        <span class="label">Corporate</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <div class="row mt-4 equal-height-row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-shield-lock"></i> Source IP Reputation
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <i class="bi bi-exclamation-triangle"></i> Attack Risk Metrics
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="stats-metric">
-                                        <span class="value highlight">5064</span>
-                                        <span class="label">Known Attackers</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="stats-metric">
-                                        <span class="value highlight">720</span>
-                                        <span class="label">Suspicious IPs</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-6">
-                                    <div class="stats-metric">
-                                        <span class="value highlight">9</span>
-                                        <span class="label">Files Downloaded</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="stats-metric">
-                                        <span class="value highlight">61.5%</span>
-                                        <span class="label">Login Success Rate</span>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="card-body">
+                        <div class="chart-container clickable-chart">
+                            <img src="images/source_ip_reputation.png" alt="Source IP Reputation" onclick="showLargeImage('images/source_ip_reputation.png', 'Source IP Reputation')">
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="row mt-4">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <i class="bi bi-shield-lock"></i> Source IP Reputation
-                        </div>
-                        <div class="card-body">
-                            <div class="chart-container clickable-chart">
-                                <img src="images/source_ip_reputation.png" alt="Source IP Reputation" onclick="showLargeImage('images/source_ip_reputation.png', 'Source IP Reputation')">
-                            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-globe"></i> Countries - Top 10
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container clickable-chart">
+                            <img src="images/top_countries.png" alt="Top Countries" onclick="showLargeImage('images/top_countries.png', 'Top Countries')">
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <i class="bi bi-globe"></i> Countries - Top 10
-                        </div>
-                        <div class="card-body">
-                            <div class="chart-container clickable-chart">
-                                <img src="images/top_countries.png" alt="Top Countries" onclick="showLargeImage('images/top_countries.png', 'Top Countries')">
-                            </div>
-                        </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-hdd-network"></i> Connection Types
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <i class="bi bi-hdd-network"></i> Connection Types
+                    <div class="card-body">
+                        <div class="chart-container clickable-chart">
+                            <img src="images/connection_types.png" alt="Connection Types" onclick="showLargeImage('images/connection_types.png', 'Connection Types')">
                         </div>
-                        <div class="card-body">
-                            <div class="chart-container clickable-chart">
-                                <img src="images/connection_types.png" alt="Connection Types" onclick="showLargeImage('images/connection_types.png', 'Connection Types')">
-                            </div>
-                            <small class="text-muted mt-2 d-block">
-                                Note: 96.8% of connections could not be classified. Chart shows breakdown of classified connections only.
+                        <div class="card-footer-note">
+                            <small class="text-muted">
+                                <i class="bi bi-info-circle"></i> 96.8% of connections could not be classified. Chart shows breakdown of classified connections only.
                             </small>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="row mt-4" id="attacks">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <i class="bi bi-exclamation-triangle"></i> Recent Attacks
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-dark table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Session ID</th>
-                                            <th>IP Address</th>
-                                            <th>Country</th>
-                                            <th>Connection Type</th>
-                                            <th>Timestamp</th>
-                                            <th>Duration</th>
-                                            <th>Commands</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        
-                                        <tr>
-                                            <td>db2ca092a1f0</td>
-                                            <td>189.7.17.61</td>
-                                            <td>Brazil</td>
-                                            <td>Unknown</td>
-                                            <td>2025-06-08 02:53:54</td>
-                                            <td>Unknown</td>
-                                            <td>0</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>6a74f5a9d072</td>
-                                            <td>103.31.38.209</td>
-                                            <td>Indonesia</td>
-                                            <td>Unknown</td>
-                                            <td>2025-06-08 02:53:42</td>
-                                            <td>2.55s</td>
-                                            <td>0</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>30a575332161</td>
-                                            <td>172.161.58.46</td>
-                                            <td>Switzerland</td>
-                                            <td>Data Center</td>
-                                            <td>2025-06-08 02:52:51</td>
-                                            <td>0.73s</td>
-                                            <td>1</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>79fbcd336a48</td>
-                                            <td>172.161.58.46</td>
-                                            <td>Switzerland</td>
-                                            <td>Data Center</td>
-                                            <td>2025-06-08 02:52:49</td>
-                                            <td>1.44s</td>
-                                            <td>0</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>3adfd9fb757e</td>
-                                            <td>172.161.58.46</td>
-                                            <td>Switzerland</td>
-                                            <td>Data Center</td>
-                                            <td>2025-06-08 02:52:47</td>
-                                            <td>1.44s</td>
-                                            <td>0</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>7b9c9f8e05ab</td>
-                                            <td>172.161.58.46</td>
-                                            <td>Switzerland</td>
-                                            <td>Data Center</td>
-                                            <td>2025-06-08 02:52:46</td>
-                                            <td>1.44s</td>
-                                            <td>0</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>167f70f60ffc</td>
-                                            <td>172.161.58.46</td>
-                                            <td>Switzerland</td>
-                                            <td>Data Center</td>
-                                            <td>2025-06-08 02:52:44</td>
-                                            <td>1.44s</td>
-                                            <td>0</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>bc4e869c055d</td>
-                                            <td>172.161.58.46</td>
-                                            <td>Switzerland</td>
-                                            <td>Data Center</td>
-                                            <td>2025-06-08 02:52:44</td>
-                                            <td>0.00s</td>
-                                            <td>0</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>2127c8c9b750</td>
-                                            <td>103.26.136.52</td>
-                                            <td>Bangladesh</td>
-                                            <td>Unknown</td>
-                                            <td>2025-06-08 02:51:12</td>
-                                            <td>2.74s</td>
-                                            <td>0</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>2789628316a7</td>
-                                            <td>189.7.17.61</td>
-                                            <td>Brazil</td>
-                                            <td>Unknown</td>
-                                            <td>2025-06-08 02:50:55</td>
-                                            <td>11.76s</td>
-                                            <td>0</td>
-                                        </tr>
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+        <!-- Rest of content continues... -->
+        <div class="row mt-4" id="attacks">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-exclamation-triangle"></i> Recent Attacks
                     </div>
-                </div>
-            </div>
-            
-            <div class="row mt-4">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <i class="bi bi-terminal"></i> Top Commands
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-dark table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Command</th>
-                                            <th>Count</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        
-                                        <tr>
-                                            <td><code>echo -e "\x6F\x6B"</code></td>
-                                            <td>101942</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td><code>cd ~; chattr -ia .ssh; lockr -ia .ssh</code></td>
-                                            <td>11161</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td><code>cd ~ && rm -rf .ssh && mkdir .ssh && echo "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEArDp4cun2lhr4KUhBGE7VvAcwdli2a8dbnrTOrbMz1+5O73fcBOx8NVbUT0bUanUV9tJ2/9p7+vD0EpZ3Tz/+0kX34uAx1RV/75GVOmNx+9EuWOnvNoaJe0QXxziIg9eLBHpgLMuakb5+BgTFB+rKJAw9u9FSTDengvS8hX1kNFS4Mjux0hJOK8rvcEmPecjdySYMb66nylAKGwCEE6WEQHmd1mUPgHwGQ0hWCwsQk13yCGPK5w6hYp5zYkFnvlC8hGmd4Ww+u97k6pfTGTUbJk14ujvcD9iUKQTTWYYjIIu5PmUux5bsZ0R4WFwdIe6+i6rBLAsPKgAySVKPRK+oRw== mdrfckr">>.ssh/authorized_keys && chmod -R go= ~/.ssh && cd ~</code></td>
-                                            <td>11158</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td><code>uname -s -v -n -r -m</code></td>
-                                            <td>6358</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td><code>(nproc; uname -a) |tr '\n' '|'</code></td>
-                                            <td>581</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td><code>nproc ; uname -a</code></td>
-                                            <td>581</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td><code>uname -s -v -n -r</code></td>
-                                            <td>426</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td><code>uname -a</code></td>
-                                            <td>187</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td><code>cat /proc/cpuinfo | grep name | wc -l</code></td>
-                                            <td>79</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td><code>rm -rf /tmp/secure.sh; rm -rf /tmp/auth.sh; pkill -9 secure.sh; pkill -9 auth.sh; echo > /etc/hosts.deny; pkill -9 sleep;</code></td>
-                                            <td>74</td>
-                                        </tr>
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <i class="bi bi-globe"></i> Top IP Addresses
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-dark table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>IP Address</th>
-                                            <th>Country</th>
-                                            <th>Count</th>
-                                            </tr>
-                                    </thead>
-                                    <tbody>
-                                        
-                                        <tr>
-                                            <td>162.246.19.141</td>
-                                            <td>United States</td>
-                                            <td>300022</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>47.240.63.58</td>
-                                            <td>Hong Kong</td>
-                                            <td>259509</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>47.83.132.218</td>
-                                            <td>Hong Kong</td>
-                                            <td>184152</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>31.145.191.148</td>
-                                            <td>Türkiye</td>
-                                            <td>63013</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>47.242.92.52</td>
-                                            <td>Hong Kong</td>
-                                            <td>60083</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>189.230.168.139</td>
-                                            <td>Mexico</td>
-                                            <td>31280</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>8.219.119.151</td>
-                                            <td>Singapore</td>
-                                            <td>27604</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>196.251.84.225</td>
-                                            <td>The Netherlands</td>
-                                            <td>19444</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>5.239.240.77</td>
-                                            <td>Iran</td>
-                                            <td>12978</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>85.95.166.40</td>
-                                            <td>Russia</td>
-                                            <td>9239</td>
-                                        </tr>
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-4" id="visualizations">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <i class="bi bi-bar-chart"></i> Visualizations
-                        </div>
-                        <div class="card-body">
-                            <ul class="nav nav-tabs" id="vizTabs" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab">Login Analysis</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="commands-tab" data-bs-toggle="tab" data-bs-target="#commands" type="button" role="tab">Command Analysis</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="sources-tab" data-bs-toggle="tab" data-bs-target="#sources" type="button" role="tab">Attack Sources</button>
-                                </li>
-                            </ul>
-                            <div class="tab-content" id="vizTabsContent">
-                                <div class="tab-pane fade show active" id="login" role="tabpanel">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="chart-container clickable-chart">
-                                                <h5>Top Usernames</h5>
-                                                <img src="images/top_usernames.png" alt="Top Usernames" onclick="showLargeImage('images/top_usernames.png', 'Top Usernames')">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="chart-container clickable-chart">
-                                                <h5>Top Passwords</h5>
-                                                <img src="images/top_passwords.png" alt="Top Passwords" onclick="showLargeImage('images/top_passwords.png', 'Top Passwords')">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mt-4">
-                                            <div class="chart-container clickable-chart">
-                                                <h5>Login Success vs. Failure</h5>
-                                                <img src="images/login_success_failure.png" alt="Login Success vs. Failure" onclick="showLargeImage('images/login_success_failure.png', 'Login Success vs. Failure')">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="commands" role="tabpanel">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="chart-container clickable-chart">
-                                                <h5>Top Commands</h5>
-                                                <img src="images/top_commands.png" alt="Top Commands" onclick="showLargeImage('images/top_commands.png', 'Top Commands')">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="chart-container clickable-chart">
-                                                <h5>Session Durations</h5>
-                                                <img src="images/session_durations.png" alt="Session Durations" onclick="showLargeImage('images/session_durations.png', 'Session Durations')">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="sources" role="tabpanel">
-                                    <div class="row">
-                                        <div class="col-md-8 mx-auto">
-                                            <div class="chart-container clickable-chart">
-                                                <h5>Top Source IPs</h5>
-                                                <img src="images/top_source_ips.png" alt="Top Source IPs" onclick="showLargeImage('images/top_source_ips.png', 'Top Source IPs')">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-dark table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Session ID</th>
+                                        <th>IP Address</th>
+                                        <th>Country</th>
+                                        <th>Connection Type</th>
+                                        <th>Timestamp</th>
+                                        <th>Duration</th>
+                                        <th>Commands</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    <tr>
+                                        <td>998ff8ce3f28</td>
+                                        <td>103.31.38.209</td>
+                                        <td>Indonesia</td>
+                                        <td>Unknown</td>
+                                        <td>2025-06-08 03:15:58</td>
+                                        <td>2.59s</td>
+                                        <td>0</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>18f5a4e5c806</td>
+                                        <td>185.216.132.243</td>
+                                        <td>Syria</td>
+                                        <td>Unknown</td>
+                                        <td>2025-06-08 03:15:45</td>
+                                        <td>1.86s</td>
+                                        <td>0</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>6b01456f3a1b</td>
+                                        <td>220.78.169.133</td>
+                                        <td>South Korea</td>
+                                        <td>Unknown</td>
+                                        <td>2025-06-08 03:15:23</td>
+                                        <td>2.24s</td>
+                                        <td>0</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>18c04a7d805d</td>
+                                        <td>47.236.7.212</td>
+                                        <td>Singapore</td>
+                                        <td>Unknown</td>
+                                        <td>2025-06-08 03:15:15</td>
+                                        <td>2.53s</td>
+                                        <td>0</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>aa47a724ad77</td>
+                                        <td>189.7.17.61</td>
+                                        <td>Brazil</td>
+                                        <td>Unknown</td>
+                                        <td>2025-06-08 03:14:59</td>
+                                        <td>6.41s</td>
+                                        <td>0</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>b25298c81c4c</td>
+                                        <td>189.7.17.61</td>
+                                        <td>Brazil</td>
+                                        <td>Unknown</td>
+                                        <td>2025-06-08 03:14:53</td>
+                                        <td>21.64s</td>
+                                        <td>0</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>3ff6e50e54a6</td>
+                                        <td>147.50.103.212</td>
+                                        <td>Thailand</td>
+                                        <td>Unknown</td>
+                                        <td>2025-06-08 03:14:24</td>
+                                        <td>2.73s</td>
+                                        <td>0</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>5e1ac405504a</td>
+                                        <td>47.236.7.212</td>
+                                        <td>Singapore</td>
+                                        <td>Unknown</td>
+                                        <td>2025-06-08 03:14:18</td>
+                                        <td>1.55s</td>
+                                        <td>0</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>78b3c2ab892d</td>
+                                        <td>47.236.7.212</td>
+                                        <td>Singapore</td>
+                                        <td>Unknown</td>
+                                        <td>2025-06-08 03:14:16</td>
+                                        <td>2.54s</td>
+                                        <td>0</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>cd1b841b730f</td>
+                                        <td>47.236.7.212</td>
+                                        <td>Singapore</td>
+                                        <td>Unknown</td>
+                                        <td>2025-06-08 03:14:13</td>
+                                        <td>7.44s</td>
+                                        <td>2</td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="imageModalLabel">Chart View</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body text-center">
-                        <img id="modalImage" src="" alt="" class="img-fluid">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a id="downloadLink" href="" download="" class="btn btn-outline-info">
-                            <i class="bi bi-download"></i> Download Image
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
-            function showLargeImage(src, title) {
-                document.getElementById('modalImage').src = src;
-                document.getElementById('imageModalLabel').textContent = title;
-                document.getElementById('downloadLink').href = src;
-                document.getElementById('downloadLink').download = title.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '.png';
-                
-                var modal = new bootstrap.Modal(document.getElementById('imageModal'));
-                modal.show();
-            }
-            
-            document.addEventListener('keydown', function(event) {
-                if (event.key === 'Escape') {
-                    var modal = bootstrap.Modal.getInstance(document.getElementById('imageModal'));
-                    if (modal) {
-                        modal.hide();
-                    }
-                }
-            });
-        </script>
-    </body>
-    </html>
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function showLargeImage(src, title) {
+            console.log('Image clicked:', src);
+        }
+    </script>
+</body>
+</html>
