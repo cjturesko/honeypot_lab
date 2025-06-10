@@ -38,5 +38,3 @@ Updates approximately every 6 hours via automated Python processing and GitHub P
 ---
 
 **Security Notice**: Contains real attack data from live honeypot deployment. All artifacts represent actual threats.
-
-Built for cybersecurity research, threat intelligence, and educational purposes.
