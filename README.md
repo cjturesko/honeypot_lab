@@ -33,7 +33,7 @@ A security intelligence dashboard analyzing SSH/Telnet attacks captured by a clo
 
 ## ⚙️ Automation
 
-Updates approximately every 6 hours via automated Python processing and GitHub Pages deployment.
+Updates approximately every 2 hours via automated Python processing and GitHub Pages deployment.
 
 ---
 
