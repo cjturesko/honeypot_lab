@@ -1,8 +1,11 @@
+> [!NOTE]
+> **Status: Collection ended.** The honeypot ran for 30 days in 2025, and data collection stopped on June 20, 2025. The dashboard is a static snapshot of the final results.
+
 # 🛡️ Cowrie Honeypot Security Dashboard
 
 A security intelligence dashboard analyzing SSH/Telnet attacks captured by a cloud-deployed Cowrie honeypot. Provides threat analysis, malware detection, and attack pattern visualization for cybersecurity research.
 
-**[🔗 View Live Dashboard](https://cjturesko.github.io/honeypot_lab/)**
+**🔗 [View Dashboard](https://cjturesko.github.io/honeypot_lab/)**
 
 ---
 
@@ -27,14 +30,14 @@ A security intelligence dashboard analyzing SSH/Telnet attacks captured by a clo
 
 - **Overview**: Attack metrics and infrastructure breakdown
 - **File Analysis**: Downloaded files with VirusTotal detection results
-- **Recent Attacks**: Live feed of attack sessions with geographic data
+- **Recent Attacks**: Feed of attack sessions with geographic data
 - **Command Analysis**: Most executed commands and attack techniques
 - **Visualizations**: Charts for login analysis, geographic distribution, and trends
 
 ## ⚙️ Automation
 
-Updates approximately every 2 hours via automated Python processing and GitHub Pages deployment.
+Updated about every 2 hours during collection via automated Python processing
 
 ---
 
-**Security Notice**: Contains real attack data from live honeypot deployment. All artifacts represent actual threats.
+**Security Notice**: Contains real attack data during the 2025 honeypot deployment. All artifacts represent actual threats.
