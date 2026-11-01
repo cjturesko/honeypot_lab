@@ -1,5 +1,5 @@
 > [!NOTE]
-> **Status: Collection ended.** The honeypot ran for 30 days in 2025, and data collection stopped on June 20, 2025. The dashboard is a static snapshot of the final results.
+> **Status: Collection ended.** The honeypot ran from April 24 to June 20, 2025. The dashboard is a static snapshot of the final results. "Attacks" counts are Cowrie log events (connections, login attempts, commands), so a single session can produce many.
 
 # 🛡️ Cowrie Honeypot Security Dashboard
 
