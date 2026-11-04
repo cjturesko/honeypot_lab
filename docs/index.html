@@ -42325,7 +42325,11 @@ echo "##########################################################################
                         if (attackLookup["Hong Kong"]) {
                             attackLookup["Hong Kong SAR China"] = attackLookup["Hong Kong"];
                             attackLookup["Hong Kong S.A.R."] = attackLookup["Hong Kong"];
+                            
                         }
+                        attackLookup["Netherlands"] = attackLookup["The Netherlands"];
+                        attackLookup["United Republic of Tanzania"] = attackLookup["Tanzania"];
+                        attackLookup["Republic of Serbia"] = attackLookup["Serbia"];
                         console.log("Attack countries:", Object.keys(attackLookup)); // Add this debug line
                         console.log("Sample attack data:", attackData.slice(0, 5));
 
